@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "os-validator-demo"
+version = "1.0.0"
+description = "Validador de ordens de serviço com regras determinísticas e IA em catálogo fechado, com avaliação contra gabarito. Dados 100% fictícios."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+authors = [{ name = "João Victor Faraco" }]
+dependencies = [
+    "pyyaml>=6.0",
+    "jsonschema>=4.20",
+]
+
+[project.optional-dependencies]
+# Só para o provedor real (Claude). O padrão, o CI e os testes não precisam dele.
+ia = ["anthropic>=2.7"]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["validador*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

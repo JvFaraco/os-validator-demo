@@ -1,0 +1,39 @@
+{
+  "id": "OS-0027",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-27",
+  "atendimento": {
+    "inicio": "2026-10-27T09:45:00",
+    "fim": "2026-10-27T10:30:00"
+  },
+  "cliente": {
+    "nome": "Carla Modelo Nunes",
+    "telefone": "(00) 90000-0027",
+    "endereco": "Rua Exemplo, 127 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-03",
+    "nome": "Rafael Teste Quintana"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SENSOR_MOVIMENTO",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "SM-2710",
+      "serie_instalada": "SM-2715",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "SM-2715",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Trocado."
+}

@@ -1,0 +1,44 @@
+{
+  "id": "OS-0026",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-26",
+  "atendimento": {
+    "inicio": "2026-10-26T09:30:00",
+    "fim": "2026-10-26T10:15:00"
+  },
+  "cliente": {
+    "nome": "Bruno Fictício Lopes",
+    "telefone": "(00) 90000-0026",
+    "endereco": "Rua Exemplo, 126 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-02",
+    "nome": "Paula Teste Mendonça"
+  },
+  "equipamentos": [
+    {
+      "categoria": "TECLADO",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "TC-2610",
+      "serie_instalada": "TC-2615",
+      "teste_registrado": false
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "TC-2610",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "TC-2615",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": true,
+    "valor": 150.0
+  },
+  "comprovante_aceite": false,
+  "fotos": 1,
+  "nota_tecnico": "Teclado com teclas travadas. Troquei o teclado; cobrança da peça conforme combinado."
+}

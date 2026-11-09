@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ordem de serviço (entrada)",
+  "description": "Contrato de entrada. O.S. fora dele é defeito da coleta, não erro do técnico: vai para revisão humana, nunca para correção.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^OS-[0-9]{4}$" },
+    "tipo_servico": { "type": "string", "enum": ["MANUTENCAO", "PREVENTIVA", "DESINSTALACAO"] },
+    "abertura": { "type": "string", "format": "date" },
+    "atendimento": {
+      "type": "object",
+      "properties": {
+        "inicio": { "type": "string" },
+        "fim": { "type": "string" }
+      },
+      "required": ["inicio", "fim"]
+    },
+    "cliente": {
+      "type": "object",
+      "properties": {
+        "nome": { "type": "string" },
+        "telefone": { "type": "string" },
+        "endereco": { "type": "string" }
+      },
+      "required": ["nome", "telefone", "endereco"]
+    },
+    "tecnico": {
+      "type": "object",
+      "properties": {
+        "matricula": { "type": "string" },
+        "nome": { "type": "string" }
+      },
+      "required": ["matricula", "nome"]
+    },
+    "equipamentos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "categoria": { "type": "string" },
+          "acao": { "type": "string", "enum": ["SUBSTITUIDO", "RETIRADO", "INSTALADO", "AJUSTADO"] },
+          "serie": { "type": "string" },
+          "serie_retirada": { "type": "string" },
+          "serie_instalada": { "type": "string" },
+          "teste_registrado": { "type": "boolean" }
+        },
+        "required": ["categoria", "acao"]
+      }
+    },
+    "movimentacoes_estoque": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "serie": { "type": "string" },
+          "tipo": { "type": "string", "enum": ["DEVOLUCAO", "SAIDA"] }
+        },
+        "required": ["serie", "tipo"]
+      }
+    },
+    "cobranca": {
+      "type": "object",
+      "properties": {
+        "cobrado": { "type": "boolean" },
+        "valor": { "type": "number", "minimum": 0 }
+      },
+      "required": ["cobrado"]
+    },
+    "comprovante_aceite": { "type": "boolean" },
+    "fotos": { "type": "integer", "minimum": 0 },
+    "nota_tecnico": { "type": "string" }
+  },
+  "required": [
+    "id", "tipo_servico", "atendimento", "cliente", "tecnico", "equipamentos",
+    "movimentacoes_estoque", "cobranca", "comprovante_aceite", "fotos", "nota_tecnico"
+  ]
+}

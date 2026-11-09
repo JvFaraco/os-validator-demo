@@ -1,0 +1,159 @@
+# Catálogo fechado de combinações problema → solução.
+#
+# É a única lista de onde a classificação pode sair. A IA recebe só as
+# combinações compatíveis com o tipo de serviço e com os equipamentos da O.S.;
+# qualquer resposta fora dela é rejeitada e a O.S. vai para revisão humana.
+#
+# `palavras_chave` é usado APENAS pelo provedor falso (linha de base offline).
+# São prefixos de palavra, sem acento e em minúsculas; o provedor real nunca
+# as recebe.
+
+versao: 1
+
+tipos_de_servico: [MANUTENCAO, PREVENTIVA, DESINSTALACAO]
+
+equipamentos:
+  SENSOR_MOVIMENTO: sensor de movimento
+  SENSOR_MAGNETICO: sensor magnético
+  CENTRAL: central de alarme
+  BATERIA: bateria
+  SIRENE: sirene
+  TECLADO: teclado
+  CAMERA: câmera
+  FONTE: fonte de alimentação
+  CONTROLE_REMOTO: controle remoto
+  GERAL: atendimento geral
+
+combinacoes:
+  - id: C01
+    equipamento: SENSOR_MOVIMENTO
+    problema: Não detecta movimento
+    solucao: Substituição do sensor
+    tipos: [MANUTENCAO]
+    palavras_chave: ["nao detecta", "sem deteccao", "substitui o sensor", "troquei o sensor", "sensor novo"]
+
+  - id: C02
+    equipamento: SENSOR_MOVIMENTO
+    problema: Disparo em falso
+    solucao: Reposicionamento e ajuste de sensibilidade
+    tipos: [MANUTENCAO]
+    palavras_chave: ["disparo em falso", "alarme falso", "alarmes falsos", "reposicion", "sensibilidade"]
+
+  - id: C03
+    equipamento: SENSOR_MAGNETICO
+    problema: Disparo em falso
+    solucao: Realinhamento do ímã
+    tipos: [MANUTENCAO]
+    palavras_chave: ["disparo em falso", "disparava", 'ima\b', "desalinh", "realinh"]
+
+  - id: C04
+    equipamento: SENSOR_MAGNETICO
+    problema: Sem comunicação com a central
+    solucao: Substituição do sensor
+    tipos: [MANUTENCAO]
+    palavras_chave: ["sem comunicacao", "nao pareava", "parear", "troquei o sensor", "substitui o sensor"]
+
+  - id: C05
+    equipamento: CENTRAL
+    problema: Sem comunicação com o monitoramento
+    solucao: Substituição do módulo de comunicação
+    tipos: [MANUTENCAO]
+    palavras_chave: ["modulo de comunicacao", "troquei o modulo", "modulo novo", "led de falha"]
+
+  - id: C06
+    equipamento: CENTRAL
+    problema: Sem comunicação com o monitoramento
+    solucao: Reconfiguração da central
+    tipos: [MANUTENCAO]
+    palavras_chave: ["reconfigur", "roteador", "rede nova", "configuracao"]
+
+  - id: C07
+    equipamento: BATERIA
+    problema: Bateria da central descarregada
+    solucao: Substituição da bateria da central
+    tipos: [MANUTENCAO]
+    palavras_chave: ["bateria da central", "bateria baixa", "12 v", "7 ah"]
+
+  - id: C08
+    equipamento: BATERIA
+    problema: Bateria de sensor sem fio fraca
+    solucao: Troca da bateria do sensor
+    tipos: [MANUTENCAO]
+    palavras_chave: ["bateria do sensor", "pilha", "sem fio", "bateria de litio"]
+
+  - id: C09
+    equipamento: SIRENE
+    problema: Sirene não toca
+    solucao: Substituição da sirene
+    tipos: [MANUTENCAO]
+    palavras_chave: ["sirene nova", "queimad", "troquei a sirene", "substitui a sirene"]
+
+  - id: C10
+    equipamento: SIRENE
+    problema: Sirene não toca
+    solucao: Reparo do cabeamento
+    tipos: [MANUTENCAO]
+    palavras_chave: ["cabo", "cabeamento", "emenda", "rompid", 'fio\b']
+
+  - id: C11
+    equipamento: TECLADO
+    problema: Teclas sem resposta
+    solucao: Substituição do teclado
+    tipos: [MANUTENCAO]
+    palavras_chave: ["tecla", "teclado"]
+
+  - id: C12
+    equipamento: CAMERA
+    problema: Sem imagem
+    solucao: Substituição da câmera
+    tipos: [MANUTENCAO]
+    palavras_chave: ["camera nova", "troquei a camera", "substitui a camera", "sem imagem"]
+
+  - id: C13
+    equipamento: CAMERA
+    problema: Sem imagem
+    solucao: Reconfiguração de rede
+    tipos: [MANUTENCAO]
+    palavras_chave: ["sem imagem", "wi-fi", "rede", "reconfigur"]
+
+  - id: C14
+    equipamento: CAMERA
+    problema: Imagem desfocada
+    solucao: Ajuste de foco e limpeza da lente
+    tipos: [MANUTENCAO]
+    palavras_chave: ["desfoc", "foco", "embac", "limpe"]
+
+  - id: C15
+    equipamento: FONTE
+    problema: Fonte sem tensão na saída
+    solucao: Substituição da fonte
+    tipos: [MANUTENCAO]
+    palavras_chave: ["fonte", "sem tensao", "alimentacao"]
+
+  - id: C16
+    equipamento: GERAL
+    problema: Encerramento de contrato
+    solucao: Retirada definitiva dos equipamentos
+    tipos: [DESINSTALACAO]
+    palavras_chave: ["encerr", "cancel", "contrato", "definitiv"]
+
+  - id: C17
+    equipamento: GERAL
+    problema: Mudança de endereço
+    solucao: Retirada para reinstalação
+    tipos: [DESINSTALACAO]
+    palavras_chave: ["mudar", "mudanca", "novo endereco", "reinstal", "imovel novo"]
+
+  - id: C18
+    equipamento: GERAL
+    problema: Revisão periódica
+    solucao: Revisão sem intervenção
+    tipos: [PREVENTIVA]
+    palavras_chave: ["nenhuma falha", "sem falha", "nada precisou", "sem intervencao", "sem ajuste"]
+
+  - id: C19
+    equipamento: GERAL
+    problema: Revisão periódica
+    solucao: Revisão com ajuste preventivo
+    tipos: [PREVENTIVA]
+    palavras_chave: ["limpe", "reapert", "ajust", "troca preventiva"]

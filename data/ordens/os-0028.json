@@ -1,0 +1,38 @@
+{
+  "id": "OS-0028",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-28",
+  "atendimento": {
+    "inicio": "2026-10-28T09:00:00",
+    "fim": "2026-10-28T09:45:00"
+  },
+  "cliente": {
+    "nome": "Diego Exemplo Prado",
+    "telefone": "(00) 90000-0028",
+    "endereco": "Rua Exemplo, 128 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-04",
+    "nome": "Sílvia Teste Barreto"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SENSOR_MAGNETICO",
+      "acao": "INSTALADO",
+      "serie_instalada": "SG-2815",
+      "teste_registrado": false
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "SG-2815",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Cliente pediu um sensor a mais na porta dos fundos. Instalei e cadastrei na central."
+}

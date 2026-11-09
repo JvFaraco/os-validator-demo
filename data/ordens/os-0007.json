@@ -1,0 +1,32 @@
+{
+  "id": "OS-0007",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-07",
+  "atendimento": {
+    "inicio": "2026-10-07T09:45:00",
+    "fim": "2026-10-07T10:30:00"
+  },
+  "cliente": {
+    "nome": "Gabriela Exemplo Sá",
+    "telefone": "(00) 90000-0007",
+    "endereco": "Rua Exemplo, 107 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-03",
+    "nome": "Rafael Teste Quintana"
+  },
+  "equipamentos": [
+    {
+      "categoria": "CAMERA",
+      "acao": "AJUSTADO",
+      "serie": "CM-0710"
+    }
+  ],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 4,
+  "nota_tecnico": "Câmera da garagem sem imagem no aplicativo. A câmera estava ligada, mas fora da rede depois da troca de senha do Wi-Fi. Reconfigurei a rede da câmera e a imagem voltou. Gabriela pediu retorno pelo (00) 98888-1234 se cair de novo."
+}

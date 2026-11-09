@@ -1,0 +1,32 @@
+{
+  "id": "OS-0004",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-04",
+  "atendimento": {
+    "inicio": "2026-10-04T09:00:00",
+    "fim": "2026-10-04T09:45:00"
+  },
+  "cliente": {
+    "nome": "Diego Exemplo Prado",
+    "telefone": "(00) 90000-0004",
+    "endereco": "Rua Exemplo, 104 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-04",
+    "nome": "Sílvia Teste Barreto"
+  },
+  "equipamentos": [
+    {
+      "categoria": "CENTRAL",
+      "acao": "AJUSTADO",
+      "serie": "CT-0410"
+    }
+  ],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Central parou de reportar ao monitoramento depois que o cliente trocou o roteador. Hardware em ordem. Reconfigurei a central com os dados da rede nova e pedi para a base confirmar o teste de comunicação, recebido normalmente."
+}

@@ -1,0 +1,32 @@
+{
+  "id": "OS-0016",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-16",
+  "atendimento": {
+    "inicio": "2026-10-16T09:00:00",
+    "fim": "2026-10-16T09:45:00"
+  },
+  "cliente": {
+    "nome": "Diego Exemplo Prado",
+    "telefone": "(00) 90000-0016",
+    "endereco": "Rua Exemplo, 116 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-04",
+    "nome": "Sílvia Teste Barreto"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SIRENE",
+      "acao": "AJUSTADO",
+      "serie": "SI-1610"
+    }
+  ],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Sirene externa muda. A sirene em si estava boa: o cabo tinha rompido atrás do forro. Refiz a emenda do cabeamento e testei o disparo."
+}

@@ -1,0 +1,26 @@
+{
+  "id": "OS-0035",
+  "tipo_servico": "PREVENTIVA",
+  "abertura": "2026-10-07",
+  "atendimento": {
+    "inicio": "2026-10-07T09:45:00",
+    "fim": "2026-10-07T10:30:00"
+  },
+  "cliente": {
+    "nome": "Karen Fictícia Dutra",
+    "telefone": "(00) 90000-0035",
+    "endereco": "Rua Exemplo, 135 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-03",
+    "nome": "Rafael Teste Quintana"
+  },
+  "equipamentos": [],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Passei no cliente para a revisão do semestre, conforme a agenda."
+}

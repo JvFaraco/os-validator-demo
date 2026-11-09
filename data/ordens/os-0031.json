@@ -1,0 +1,37 @@
+{
+  "id": "OS-0031",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-03",
+  "atendimento": {
+    "inicio": "2026-10-03T09:45:00",
+    "fim": "2026-10-03T10:30:00"
+  },
+  "cliente": {
+    "nome": "Gabriela Exemplo Sá",
+    "telefone": "(00) 90000-0031",
+    "endereco": "Rua Exemplo, 131 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-03",
+    "nome": "Rafael Teste Quintana"
+  },
+  "equipamentos": [
+    {
+      "categoria": "CAMERA",
+      "acao": "AJUSTADO",
+      "serie": "CM-3110"
+    },
+    {
+      "categoria": "SIRENE",
+      "acao": "AJUSTADO",
+      "serie": "SI-3120"
+    }
+  ],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Ajustei a câmera do quintal, que estava sem imagem, e refiz o cabo da sirene, que não tocava."
+}

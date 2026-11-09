@@ -1,0 +1,43 @@
+{
+  "id": "OS-0001",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-01",
+  "atendimento": {
+    "inicio": "2026-10-01T09:15:00",
+    "fim": "2026-10-01T10:00:00"
+  },
+  "cliente": {
+    "nome": "Ana Exemplo Ribeiro",
+    "telefone": "(00) 90000-0001",
+    "endereco": "Rua Exemplo, 101 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-01",
+    "nome": "Marcos Teste Albuquerque"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SENSOR_MOVIMENTO",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "SM-0110",
+      "serie_instalada": "SM-0115",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "SM-0110",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "SM-0115",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Cliente relatou que o sensor da sala não detectava presença. Testei com o modo teste e o sensor não acendia o LED. Substituí o sensor de movimento por um novo e testei a detecção com a central, tudo funcionando."
+}

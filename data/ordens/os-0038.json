@@ -1,0 +1,32 @@
+{
+  "id": "OS-0038",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-10",
+  "atendimento": {
+    "inicio": "2026-10-10T09:30:00",
+    "fim": "2026-10-10T10:15:00"
+  },
+  "cliente": {
+    "nome": "Bruno Fictício Lopes",
+    "telefone": "(00) 90000-0038",
+    "endereco": "Rua Exemplo, 138 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-02",
+    "nome": "Paula Teste Mendonça"
+  },
+  "equipamentos": [
+    {
+      "categoria": "CAMERA",
+      "acao": "AJUSTADO",
+      "serie": "CM-3810"
+    }
+  ],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Imagem ruim na câmera da sala, fiz o que deu."
+}

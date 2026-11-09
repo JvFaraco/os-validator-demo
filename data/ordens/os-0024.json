@@ -1,0 +1,26 @@
+{
+  "id": "OS-0024",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-24",
+  "atendimento": {
+    "inicio": "2026-10-24T09:00:00",
+    "fim": "2026-10-24T09:25:00"
+  },
+  "cliente": {
+    "nome": "Lucas Modelo Brandão",
+    "telefone": "(00) 90000-0024",
+    "endereco": "Rua Exemplo, 124 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-04",
+    "nome": "Sílvia Teste Barreto"
+  },
+  "equipamentos": [],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Cliente não estava no local no horário agendado. Aguardei 20 minutos e liguei sem sucesso."
+}

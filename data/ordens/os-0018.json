@@ -1,0 +1,32 @@
+{
+  "id": "OS-0018",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-18",
+  "atendimento": {
+    "inicio": "2026-10-18T09:30:00",
+    "fim": "2026-10-18T10:15:00"
+  },
+  "cliente": {
+    "nome": "Fábio Modelo Teles",
+    "telefone": "(00) 90000-0018",
+    "endereco": "Rua Exemplo, 118 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-02",
+    "nome": "Paula Teste Mendonça"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SENSOR_MAGNETICO",
+      "acao": "AJUSTADO",
+      "serie": "SG-1810"
+    }
+  ],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Feito, ok."
+}

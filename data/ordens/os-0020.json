@@ -1,0 +1,51 @@
+{
+  "id": "OS-0020",
+  "tipo_servico": "DESINSTALACAO",
+  "abertura": "2026-10-20",
+  "atendimento": {
+    "inicio": "2026-10-20T09:00:00",
+    "fim": "2026-10-20T09:45:00"
+  },
+  "cliente": {
+    "nome": "Hugo Fictício Rangel",
+    "telefone": "(00) 90000-0020",
+    "endereco": "Rua Exemplo, 120 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-04",
+    "nome": "Sílvia Teste Barreto"
+  },
+  "equipamentos": [
+    {
+      "categoria": "CENTRAL",
+      "acao": "RETIRADO",
+      "serie_retirada": "CT-2010"
+    },
+    {
+      "categoria": "SENSOR_MOVIMENTO",
+      "acao": "RETIRADO",
+      "serie_retirada": "SM-2020"
+    },
+    {
+      "categoria": "SIRENE",
+      "acao": "RETIRADO",
+      "serie_retirada": "SI-2030"
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "CT-2010",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "SM-2020",
+      "tipo": "DEVOLUCAO"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Contrato encerrado pelo cliente. Retirei central, sensor e sirene."
+}

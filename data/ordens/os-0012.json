@@ -1,0 +1,43 @@
+{
+  "id": "OS-0012",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-12",
+  "atendimento": {
+    "inicio": "2026-10-12T09:00:00",
+    "fim": "2026-10-12T09:45:00"
+  },
+  "cliente": {
+    "nome": "Lucas Modelo Brandão",
+    "telefone": "(00) 90000-0012",
+    "endereco": "Rua Exemplo, 112 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-04",
+    "nome": "Sílvia Teste Barreto"
+  },
+  "equipamentos": [
+    {
+      "categoria": "TECLADO",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "TC-1210",
+      "serie_instalada": "TC-1215",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "TC-1210",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "TC-1215",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 1,
+  "nota_tecnico": "Teclado da entrada com várias teclas sem resposta, inclusive a de confirmação. Substituí o teclado e cadastrei de novo as senhas dos usuários; arme e desarme testados. Relatório pedido no e-mail lucas.exemplo@example.com."
+}

@@ -1,0 +1,32 @@
+{
+  "id": "OS-0036",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-08",
+  "atendimento": {
+    "inicio": "2026-10-08T09:00:00",
+    "fim": "2026-10-08T09:45:00"
+  },
+  "cliente": {
+    "nome": "Lucas Modelo Brandão",
+    "telefone": "(00) 90000-0036",
+    "endereco": "Rua Exemplo, 136 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-04",
+    "nome": "Sílvia Teste Barreto"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SENSOR_MOVIMENTO",
+      "acao": "AJUSTADO",
+      "serie": "SM-3610"
+    }
+  ],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Cliente achou que o sensor não detectava, mas o sensor estava bom: o sistema era armado no modo errado. Expliquei o uso do teclado e testamos juntos."
+}

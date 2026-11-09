@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pacote enviado à IA",
+  "description": "Tudo o que sai da máquina para o modelo. Montado por allowlist e validado com additionalProperties: false em todos os níveis: um campo novo só sai se for autorizado aqui.",
+  "type": "object",
+  "properties": {
+    "tipo_servico": { "type": "string", "enum": ["MANUTENCAO", "PREVENTIVA", "DESINSTALACAO"] },
+    "equipamentos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "categoria": { "type": "string" },
+          "acao": { "type": "string", "enum": ["SUBSTITUIDO", "RETIRADO", "INSTALADO", "AJUSTADO"] }
+        },
+        "required": ["categoria", "acao"],
+        "additionalProperties": false
+      }
+    },
+    "nota_tecnico": { "type": "string" }
+  },
+  "required": ["tipo_servico", "equipamentos", "nota_tecnico"],
+  "additionalProperties": false
+}

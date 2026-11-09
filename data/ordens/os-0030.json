@@ -1,0 +1,32 @@
+{
+  "id": "OS-0030",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-02",
+  "atendimento": {
+    "inicio": "2026-10-02T09:30:00",
+    "fim": "2026-10-02T10:15:00"
+  },
+  "cliente": {
+    "nome": "Fábio Modelo Teles",
+    "telefone": "(00) 90000-0030",
+    "endereco": "Rua Exemplo, 130 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-02",
+    "nome": "Paula Teste Mendonça"
+  },
+  "equipamentos": [
+    {
+      "categoria": "CENTRAL",
+      "acao": "AJUSTADO",
+      "serie": "CT-3010"
+    }
+  ],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Atendimento realizado conforme solicitado, sistema funcionando normalmente ao final."
+}

@@ -1,0 +1,43 @@
+{
+  "id": "OS-0033",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-05",
+  "atendimento": {
+    "inicio": "2026-10-05T09:15:00",
+    "fim": "2026-10-05T10:00:00"
+  },
+  "cliente": {
+    "nome": "Irene Modelo Campos",
+    "telefone": "(00) 90000-0033",
+    "endereco": "Rua Exemplo, 133 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-01",
+    "nome": "Marcos Teste Albuquerque"
+  },
+  "equipamentos": [
+    {
+      "categoria": "CONTROLE_REMOTO",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "CR-3310",
+      "serie_instalada": "CR-3315",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "CR-3310",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "CR-3315",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Controle remoto não armava o sistema. Troquei o controle e cadastrei na central; arme e desarme testados."
+}

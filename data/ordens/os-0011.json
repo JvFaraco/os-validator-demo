@@ -1,0 +1,55 @@
+{
+  "id": "OS-0011",
+  "tipo_servico": "DESINSTALACAO",
+  "abertura": "2026-10-11",
+  "atendimento": {
+    "inicio": "2026-10-11T09:45:00",
+    "fim": "2026-10-11T10:30:00"
+  },
+  "cliente": {
+    "nome": "Karen Fictícia Dutra",
+    "telefone": "(00) 90000-0011",
+    "endereco": "Rua Exemplo, 111 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-03",
+    "nome": "Rafael Teste Quintana"
+  },
+  "equipamentos": [
+    {
+      "categoria": "CENTRAL",
+      "acao": "RETIRADO",
+      "serie_retirada": "CT-1110"
+    },
+    {
+      "categoria": "SENSOR_MAGNETICO",
+      "acao": "RETIRADO",
+      "serie_retirada": "SG-1120"
+    },
+    {
+      "categoria": "TECLADO",
+      "acao": "RETIRADO",
+      "serie_retirada": "TC-1130"
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "CT-1110",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "SG-1120",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "TC-1130",
+      "tipo": "DEVOLUCAO"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Cliente vai mudar de endereço no fim do mês e quer o sistema no imóvel novo. Retirei os equipamentos com cuidado e embalei para reinstalação no novo endereço."
+}

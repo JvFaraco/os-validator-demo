@@ -1,0 +1,39 @@
+{
+  "id": "OS-0019",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-19",
+  "atendimento": {
+    "inicio": "2026-10-19T09:45:00",
+    "fim": "2026-10-19T10:30:00"
+  },
+  "cliente": {
+    "nome": "Gabriela Exemplo Sá",
+    "telefone": "(00) 90000-0019",
+    "endereco": "Rua Exemplo, 119 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-03",
+    "nome": "Rafael Teste Quintana"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SENSOR_MOVIMENTO",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "SM-1910",
+      "serie_instalada": "SM-1915",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "SM-1915",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Sensor da sala de estar não detectava movimento. Substituí o sensor de movimento e testei a detecção pela central."
+}

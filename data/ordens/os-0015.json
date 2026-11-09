@@ -1,0 +1,43 @@
+{
+  "id": "OS-0015",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-15",
+  "atendimento": {
+    "inicio": "2026-10-15T09:45:00",
+    "fim": "2026-10-15T10:30:00"
+  },
+  "cliente": {
+    "nome": "Carla Modelo Nunes",
+    "telefone": "(00) 90000-0015",
+    "endereco": "Rua Exemplo, 115 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-03",
+    "nome": "Rafael Teste Quintana"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SENSOR_MAGNETICO",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "SG-1510",
+      "serie_instalada": "SG-1515",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "SG-1510",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "SG-1515",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Sensor da janela do quarto aparecia como sem comunicação na central. Bateria nova não resolveu, o sensor não pareava mais. Troquei o sensor magnético e a central reconheceu na primeira tentativa."
+}

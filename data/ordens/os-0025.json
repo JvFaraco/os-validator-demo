@@ -1,0 +1,39 @@
+{
+  "id": "OS-0025",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-25",
+  "atendimento": {
+    "inicio": "2026-10-25T09:15:00",
+    "fim": "2026-10-25T10:00:00"
+  },
+  "cliente": {
+    "nome": "Ana Exemplo Ribeiro",
+    "telefone": "(00) 90000-0025",
+    "endereco": "Rua Exemplo, 125 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-01",
+    "nome": "Marcos Teste Albuquerque"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SIRENE",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "SI-2510",
+      "serie_instalada": "SI-2510",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "SI-2510",
+      "tipo": "DEVOLUCAO"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Sirene sem som no teste de disparo. Troquei a sirene e testei o disparo de novo."
+}

@@ -1,0 +1,44 @@
+{
+  "id": "OS-0005",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-05",
+  "atendimento": {
+    "inicio": "2026-10-05T09:15:00",
+    "fim": "2026-10-05T10:00:00"
+  },
+  "cliente": {
+    "nome": "Elisa Fictícia Moraes",
+    "telefone": "(00) 90000-0005",
+    "endereco": "Rua Exemplo, 105 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-01",
+    "nome": "Marcos Teste Albuquerque"
+  },
+  "equipamentos": [
+    {
+      "categoria": "BATERIA",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "BT-0510",
+      "serie_instalada": "BT-0515",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "BT-0510",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "BT-0515",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": true,
+    "valor": 90.0
+  },
+  "comprovante_aceite": true,
+  "fotos": 3,
+  "nota_tecnico": "Painel indicando bateria baixa. Medi 10,2 V na bateria da central, abaixo do mínimo. Substituí a bateria de 12 V 7 Ah e a central carregou normalmente. Cliente assinou o aceite da cobrança."
+}

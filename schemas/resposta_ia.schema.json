@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Resposta da IA para uma O.S.",
+  "description": "Contrato da saída do modelo. Validado localmente em toda resposta, qualquer que seja o provedor. A IA não devolve decisão: só a classificação e o trecho que a sustenta.",
+  "type": "object",
+  "properties": {
+    "combinacao_id": {
+      "type": "string",
+      "pattern": "^(C[0-9]{2}|NENHUMA)$",
+      "description": "Uma das combinações permitidas para esta O.S., ou NENHUMA quando a nota não permite escolher com segurança."
+    },
+    "confianca": {
+      "type": "string",
+      "enum": ["alta", "media", "baixa"]
+    },
+    "trecho_citado": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "Cópia literal de um trecho da nota (já mascarada) que sustenta a escolha."
+    },
+    "observacao_conferente": {
+      "type": "string",
+      "maxLength": 400,
+      "description": "Uma ou duas frases objetivas para a pessoa que confere a O.S."
+    }
+  },
+  "required": ["combinacao_id", "confianca", "trecho_citado", "observacao_conferente"],
+  "additionalProperties": false
+}

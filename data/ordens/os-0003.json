@@ -1,0 +1,43 @@
+{
+  "id": "OS-0003",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-03",
+  "atendimento": {
+    "inicio": "2026-10-03T09:45:00",
+    "fim": "2026-10-03T10:30:00"
+  },
+  "cliente": {
+    "nome": "Carla Modelo Nunes",
+    "telefone": "(00) 90000-0003",
+    "endereco": "Rua Exemplo, 103 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-03",
+    "nome": "Rafael Teste Quintana"
+  },
+  "equipamentos": [
+    {
+      "categoria": "CENTRAL",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "CT-0310",
+      "serie_instalada": "CT-0315",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "CT-0310",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "CT-0315",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Monitoramento sem receber sinal da central desde ontem. Módulo de comunicação com LED de falha e sem registrar na rede. Troquei o módulo de comunicação e confirmei com a base que os eventos voltaram a chegar."
+}

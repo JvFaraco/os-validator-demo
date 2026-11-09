@@ -1,0 +1,43 @@
+{
+  "id": "OS-0032",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-04",
+  "atendimento": {
+    "inicio": "2026-10-04T09:00:00",
+    "fim": "2026-10-04T09:45:00"
+  },
+  "cliente": {
+    "nome": "Hugo Fictício Rangel",
+    "telefone": "(00) 90000-0032",
+    "endereco": "Rua Exemplo, 132 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-04",
+    "nome": "Sílvia Teste Barreto"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SIRENE",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "SI-3210",
+      "serie_instalada": "SI-3215",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "SI-3210",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "SI-3215",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Câmera da frente sem imagem; troquei a câmera por uma nova e a imagem voltou no aplicativo."
+}

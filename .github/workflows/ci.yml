@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar
+        # o extra [ia] entra só para o teste do SDK contra um servidor local; nenhuma chamada sai da máquina
+        run: pip install -e ".[dev,ia]"
+
+      - name: Testes (offline)
+        run: pytest
+
+      - name: Varredura de dado pessoal e segredos
+        run: python tools/scan_pii.py
+
+      - name: Avaliação com o provedor falso
+        run: python -m validador avaliar --sem-cor

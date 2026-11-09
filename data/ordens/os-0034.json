@@ -1,0 +1,46 @@
+{
+  "id": "OS-0034",
+  "tipo_servico": "DESINSTALACAO",
+  "abertura": "2026-10-06",
+  "atendimento": {
+    "inicio": "2026-10-06T09:30:00",
+    "fim": "2026-10-06T10:15:00"
+  },
+  "cliente": {
+    "nome": "João Exemplo Varela",
+    "telefone": "(00) 90000-0034",
+    "endereco": "Rua Exemplo, 134 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-02",
+    "nome": "Paula Teste Mendonça"
+  },
+  "equipamentos": [
+    {
+      "categoria": "CENTRAL",
+      "acao": "RETIRADO",
+      "serie_retirada": "CT-3410"
+    },
+    {
+      "categoria": "SENSOR_MOVIMENTO",
+      "acao": "RETIRADO",
+      "serie_retirada": "SM-3420"
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "CT-3410",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "SM-3420",
+      "tipo": "DEVOLUCAO"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Equipamentos retirados do local."
+}

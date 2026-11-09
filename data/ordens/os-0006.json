@@ -1,0 +1,43 @@
+{
+  "id": "OS-0006",
+  "tipo_servico": "MANUTENCAO",
+  "abertura": "2026-10-06",
+  "atendimento": {
+    "inicio": "2026-10-06T09:30:00",
+    "fim": "2026-10-06T10:15:00"
+  },
+  "cliente": {
+    "nome": "Fábio Modelo Teles",
+    "telefone": "(00) 90000-0006",
+    "endereco": "Rua Exemplo, 106 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-02",
+    "nome": "Paula Teste Mendonça"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SIRENE",
+      "acao": "SUBSTITUIDO",
+      "serie_retirada": "SI-0610",
+      "serie_instalada": "SI-0615",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "SI-0610",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "SI-0615",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Sirene interna não tocava no teste de disparo. Cabeamento conferido com multímetro e em ordem; a sirene estava queimada. Instalei sirene nova e fiz disparo de teste com o cliente presente."
+}

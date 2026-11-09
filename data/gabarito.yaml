@@ -1,0 +1,50 @@
+# Gabarito rotulado à mão: o que uma pessoa conferente decidiria lendo cada O.S.
+#
+# Escrito antes de rodar qualquer provedor e sem ajuste posterior para "bater".
+# decisao     caminho esperado
+# combinacao  combinação do catálogo que a nota descreve (null quando não há uma só)
+# regras      códigos de achado que as regras devem produzir
+
+# --- Prontas para validação: nota clara, nada pendente ------------------------
+OS-0001: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C01, regras: []}
+OS-0002: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C03, regras: []}
+OS-0003: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C05, regras: []}
+OS-0004: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C06, regras: []}   # mesmo problema da 0003, solução diferente
+OS-0005: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C07, regras: []}   # cobrança com aceite
+OS-0006: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C09, regras: []}
+OS-0007: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C13, regras: []}   # nota com nome e telefone do cliente
+OS-0008: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C18, regras: []}
+OS-0009: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C19, regras: []}
+OS-0010: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C16, regras: []}
+OS-0011: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C17, regras: []}
+OS-0012: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C11, regras: [POUCAS_FOTOS]}      # aviso não bloqueia; nota com e-mail
+OS-0013: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C15, regras: [DURACAO_ATIPICA]}   # 6 minutos
+OS-0014: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C02, regras: []}
+OS-0015: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C04, regras: []}   # cita bateria, mas o equipamento é o sensor
+OS-0016: {decisao: PRONTA_PARA_VALIDACAO, combinacao: C10, regras: []}   # "a sirene estava boa": o reparo foi no cabo
+
+# --- Precisa de correção: pendência verificável, volta ao técnico --------------
+OS-0017: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [NOTA_VAZIA]}
+OS-0018: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [NOTA_VAZIA]}
+OS-0019: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [RETIRADA_SEM_MOVIMENTACAO]}
+OS-0020: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [RETIRADA_SEM_MOVIMENTACAO]}  # 1 de 3 sem devolução
+OS-0021: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [COBRANCA_SEM_ACEITE]}
+OS-0022: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [EQUIPAMENTO_NOVO_SEM_TESTE]}
+OS-0023: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [TIPO_INCOMPATIVEL]}           # desinstalação que instala
+OS-0024: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [TIPO_INCOMPATIVEL]}           # manutenção sem atendimento
+OS-0025: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [SERIE_REPETIDA]}
+OS-0026: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [COBRANCA_SEM_ACEITE, EQUIPAMENTO_NOVO_SEM_TESTE, POUCAS_FOTOS]}
+OS-0027: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [NOTA_VAZIA, RETIRADA_SEM_MOVIMENTACAO]}
+OS-0028: {decisao: PRECISA_CORRECAO, combinacao: null, regras: [EQUIPAMENTO_NOVO_SEM_TESTE]}
+
+# --- Revisão humana: regras passam, mas a nota não sustenta uma classificação --
+OS-0029: {decisao: REVISAO_HUMANA, combinacao: null, regras: []}   # nota tenta dar ordem ao sistema
+OS-0030: {decisao: REVISAO_HUMANA, combinacao: null, regras: []}   # vaga: não diz o que foi feito na central
+OS-0031: {decisao: REVISAO_HUMANA, combinacao: null, regras: []}   # dois atendimentos diferentes numa O.S.
+OS-0032: {decisao: REVISAO_HUMANA, combinacao: null, regras: []}   # nota fala de câmera, registro diz sirene
+OS-0033: {decisao: REVISAO_HUMANA, combinacao: null, regras: []}   # equipamento sem combinação no catálogo
+OS-0034: {decisao: REVISAO_HUMANA, combinacao: null, regras: []}   # desinstalação sem dizer o motivo
+OS-0035: {decisao: REVISAO_HUMANA, combinacao: null, regras: []}   # preventiva sem dizer se houve ajuste
+OS-0036: {decisao: REVISAO_HUMANA, combinacao: null, regras: []}   # "não detectava" negado: foi orientação de uso
+OS-0037: {decisao: REVISAO_HUMANA, combinacao: null, regras: []}   # bateria da central ou do sensor?
+OS-0038: {decisao: REVISAO_HUMANA, combinacao: null, regras: []}   # "fiz o que deu": sem problema nem solução

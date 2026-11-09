@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="773" height="754" viewBox="0 0 773 754" role="img" aria-label="python -m validador analisar data/ordens/os-0007.json">
+<rect width="773" height="754" rx="10" fill="#0d1117"/>
+<circle cx="20" cy="17" r="6" fill="#ff5f57"/><circle cx="40" cy="17" r="6" fill="#febc2e"/><circle cx="60" cy="17" r="6" fill="#28c840"/>
+<g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="13" fill="#e6edf3" xml:space="preserve">
+<text x="18" y="48"><tspan fill="#8b949e">$</tspan><tspan>&#160;python&#160;-m&#160;validador&#160;analisar&#160;data/ordens/os-0007.json</tspan></text>
+<text x="18" y="66"></text>
+<text x="18" y="84"><tspan font-weight="700">OS-0007&#160;·&#160;MANUTENCAO</tspan><tspan fill="#8b949e">&#160;&#160;&#160;provedor:&#160;falso</tspan></text>
+<text x="18" y="102"><tspan fill="#8b949e">────────────────────────────────────────────────────────────────────────────────────────────</tspan></text>
+<text x="18" y="120"><tspan fill="#56d4dd" font-weight="700">1&#160;&#160;Pacote&#160;sanitizado</tspan><tspan fill="#8b949e">&#160;&#160;o&#160;que&#160;sai&#160;da&#160;máquina&#160;para&#160;a&#160;IA</tspan></text>
+<text x="18" y="138"><tspan>&#160;&#160;&#160;</tspan><tspan fill="#79c0ff">tipo_servico&#160;&#160;</tspan><tspan>MANUTENCAO</tspan></text>
+<text x="18" y="156"><tspan>&#160;&#160;&#160;</tspan><tspan fill="#79c0ff">equipamentos&#160;&#160;</tspan><tspan>CAMERA&#160;(AJUSTADO)</tspan></text>
+<text x="18" y="174"><tspan>&#160;&#160;&#160;</tspan><tspan fill="#79c0ff">nota_tecnico&#160;&#160;</tspan><tspan>Câmera&#160;da&#160;garagem&#160;sem&#160;imagem&#160;no&#160;aplicativo.&#160;A&#160;câmera&#160;estava&#160;ligada,&#160;mas</tspan></text>
+<text x="18" y="192"><tspan>&#160;&#160;&#160;</tspan><tspan fill="#79c0ff">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</tspan><tspan>fora&#160;da&#160;rede&#160;depois&#160;da&#160;troca&#160;de&#160;senha&#160;do&#160;Wi-Fi.&#160;Reconfigurei&#160;a&#160;rede&#160;da</tspan></text>
+<text x="18" y="210"><tspan>&#160;&#160;&#160;</tspan><tspan fill="#79c0ff">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</tspan><tspan>câmera&#160;e&#160;a&#160;imagem&#160;voltou.&#160;</tspan><tspan fill="#d2a8ff">[NOME]</tspan><tspan>&#160;pediu&#160;retorno&#160;pelo&#160;</tspan><tspan fill="#d2a8ff">[TELEFONE]</tspan><tspan>&#160;se&#160;cair&#160;de</tspan></text>
+<text x="18" y="228"><tspan>&#160;&#160;&#160;</tspan><tspan fill="#79c0ff">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</tspan><tspan>novo.</tspan></text>
+<text x="18" y="246"><tspan fill="#8b949e">&#160;&#160;&#160;fora&#160;do&#160;pacote&#160;(14):&#160;abertura,&#160;atendimento.fim,&#160;atendimento.inicio,&#160;cliente.endereco,</tspan></text>
+<text x="18" y="264"><tspan fill="#8b949e">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;cliente.nome,&#160;cliente.telefone,&#160;cobranca.cobrado,</tspan></text>
+<text x="18" y="282"><tspan fill="#8b949e">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;comprovante_aceite,&#160;equipamentos[].serie,&#160;fotos,&#160;id,</tspan></text>
+<text x="18" y="300"><tspan fill="#8b949e">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;movimentacoes_estoque,&#160;tecnico.matricula,&#160;tecnico.nome</tspan></text>
+<text x="18" y="318"><tspan>&#160;&#160;&#160;</tspan><tspan fill="#8b949e">mascarado&#160;na&#160;nota:&#160;</tspan><tspan fill="#d2a8ff">1×&#160;[NOME],&#160;1×&#160;[TELEFONE]</tspan></text>
+<text x="18" y="336"></text>
+<text x="18" y="354"><tspan fill="#56d4dd" font-weight="700">2&#160;&#160;Regras&#160;determinísticas</tspan><tspan fill="#8b949e">&#160;&#160;8&#160;regras,&#160;sem&#160;interpretação</tspan></text>
+<text x="18" y="372"><tspan>&#160;&#160;&#160;</tspan><tspan fill="#7ee787">✓</tspan><tspan>&#160;nenhuma&#160;pendência</tspan></text>
+<text x="18" y="390"></text>
+<text x="18" y="408"><tspan fill="#56d4dd" font-weight="700">3&#160;&#160;IA&#160;em&#160;catálogo&#160;fechado</tspan><tspan fill="#8b949e">&#160;&#160;3&#160;opções&#160;para&#160;esta&#160;O.S.,&#160;de&#160;19&#160;no&#160;catálogo</tspan></text>
+<text x="18" y="426"><tspan fill="#79c0ff">&#160;&#160;&#160;C12</tspan><tspan>&#160;Sem&#160;imagem&#160;→&#160;Substituição&#160;da&#160;câmera</tspan></text>
+<text x="18" y="444"><tspan fill="#79c0ff">&#160;&#160;&#160;C13</tspan><tspan>&#160;Sem&#160;imagem&#160;→&#160;Reconfiguração&#160;de&#160;rede</tspan></text>
+<text x="18" y="462"><tspan fill="#79c0ff">&#160;&#160;&#160;C14</tspan><tspan>&#160;Imagem&#160;desfocada&#160;→&#160;Ajuste&#160;de&#160;foco&#160;e&#160;limpeza&#160;da&#160;lente</tspan></text>
+<text x="18" y="480"><tspan fill="#8b949e">&#160;&#160;&#160;resposta:</tspan></text>
+<text x="18" y="498"><tspan>&#160;&#160;&#160;&#160;&#160;</tspan><tspan fill="#79c0ff">combinacao_id&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</tspan><tspan>C13</tspan></text>
+<text x="18" y="516"><tspan>&#160;&#160;&#160;&#160;&#160;</tspan><tspan fill="#79c0ff">confianca&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</tspan><tspan>alta</tspan></text>
+<text x="18" y="534"><tspan>&#160;&#160;&#160;&#160;&#160;</tspan><tspan fill="#79c0ff">trecho_citado&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</tspan><tspan>Câmera&#160;da&#160;garagem&#160;sem&#160;imagem&#160;no&#160;aplicativo.</tspan></text>
+<text x="18" y="552"><tspan>&#160;&#160;&#160;&#160;&#160;</tspan><tspan fill="#79c0ff">observacao_conferente&#160;&#160;</tspan><tspan>Escolha&#160;por&#160;palavras-chave:&#160;sem&#160;imagem,&#160;wi-fi,&#160;rede,&#160;reconfigur.</tspan></text>
+<text x="18" y="570"><tspan>&#160;&#160;&#160;</tspan><tspan fill="#7ee787">✓</tspan><tspan>&#160;JSON&#160;válido&#160;&#160;&#160;</tspan><tspan fill="#7ee787">✓</tspan><tspan>&#160;dentro&#160;do&#160;schema&#160;&#160;&#160;</tspan><tspan fill="#7ee787">✓</tspan><tspan>&#160;combinação&#160;entre&#160;as&#160;opções&#160;desta&#160;O.S.</tspan></text>
+<text x="18" y="588"><tspan>&#160;&#160;&#160;</tspan><tspan fill="#7ee787">✓</tspan><tspan>&#160;trecho&#160;citado&#160;está&#160;na&#160;nota&#160;&#160;&#160;</tspan><tspan fill="#7ee787">✓</tspan><tspan>&#160;confiança&#160;acima&#160;do&#160;limiar</tspan></text>
+<text x="18" y="606"></text>
+<text x="18" y="624"><tspan fill="#56d4dd" font-weight="700">4&#160;&#160;Decisão</tspan></text>
+<text x="18" y="642"><tspan>&#160;&#160;&#160;</tspan><tspan fill="#7ee787" font-weight="700">PRONTA_PARA_VALIDACAO</tspan><tspan>&#160;&#160;C13&#160;·&#160;Sem&#160;imagem&#160;→&#160;Reconfiguração&#160;de&#160;rede</tspan></text>
+<text x="18" y="660"><tspan fill="#8b949e">&#160;&#160;&#160;Sem&#160;pendência&#160;nas&#160;regras&#160;e&#160;classificação&#160;aceita.</tspan></text>
+<text x="18" y="678"><tspan font-weight="700">&#160;&#160;&#160;avisos&#160;ao&#160;conferente:</tspan></text>
+<text x="18" y="696"><tspan>&#160;&#160;&#160;-&#160;Leitura&#160;da&#160;IA:&#160;Escolha&#160;por&#160;palavras-chave:&#160;sem&#160;imagem,&#160;wi-fi,&#160;rede,&#160;reconfigur.</tspan></text>
+<text x="18" y="714"></text>
+<text x="18" y="732"><tspan fill="#8b949e">&#160;&#160;&#160;A&#160;aprovação&#160;final&#160;é&#160;sempre&#160;de&#160;uma&#160;pessoa:&#160;o&#160;sistema&#160;só&#160;prepara&#160;a&#160;O.S.&#160;e&#160;diz&#160;o&#160;que&#160;conferir.</tspan></text>
+</g>
+</svg>

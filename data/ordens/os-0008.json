@@ -1,0 +1,26 @@
+{
+  "id": "OS-0008",
+  "tipo_servico": "PREVENTIVA",
+  "abertura": "2026-10-08",
+  "atendimento": {
+    "inicio": "2026-10-08T09:00:00",
+    "fim": "2026-10-08T10:20:00"
+  },
+  "cliente": {
+    "nome": "Hugo Fictício Rangel",
+    "telefone": "(00) 90000-0008",
+    "endereco": "Rua Exemplo, 108 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-04",
+    "nome": "Sílvia Teste Barreto"
+  },
+  "equipamentos": [],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Revisão preventiva semestral. Testei todos os sensores, a sirene e a comunicação com a base. Nenhuma falha encontrada e nada precisou ser ajustado."
+}

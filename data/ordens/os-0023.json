@@ -1,0 +1,47 @@
+{
+  "id": "OS-0023",
+  "tipo_servico": "DESINSTALACAO",
+  "abertura": "2026-10-23",
+  "atendimento": {
+    "inicio": "2026-10-23T09:45:00",
+    "fim": "2026-10-23T10:30:00"
+  },
+  "cliente": {
+    "nome": "Karen Fictícia Dutra",
+    "telefone": "(00) 90000-0023",
+    "endereco": "Rua Exemplo, 123 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-03",
+    "nome": "Rafael Teste Quintana"
+  },
+  "equipamentos": [
+    {
+      "categoria": "CENTRAL",
+      "acao": "RETIRADO",
+      "serie_retirada": "CT-2310"
+    },
+    {
+      "categoria": "SENSOR_MOVIMENTO",
+      "acao": "INSTALADO",
+      "serie_instalada": "SM-2325",
+      "teste_registrado": true
+    }
+  ],
+  "movimentacoes_estoque": [
+    {
+      "serie": "CT-2310",
+      "tipo": "DEVOLUCAO"
+    },
+    {
+      "serie": "SM-2325",
+      "tipo": "SAIDA"
+    }
+  ],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Retirada da central a pedido do cliente por encerramento do contrato; instalei um sensor no depósito."
+}

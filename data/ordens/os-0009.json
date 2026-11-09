@@ -1,0 +1,32 @@
+{
+  "id": "OS-0009",
+  "tipo_servico": "PREVENTIVA",
+  "abertura": "2026-10-09",
+  "atendimento": {
+    "inicio": "2026-10-09T09:15:00",
+    "fim": "2026-10-09T10:25:00"
+  },
+  "cliente": {
+    "nome": "Irene Modelo Campos",
+    "telefone": "(00) 90000-0009",
+    "endereco": "Rua Exemplo, 109 - Bairro Modelo, Cidade Fictícia"
+  },
+  "tecnico": {
+    "matricula": "T-01",
+    "nome": "Marcos Teste Albuquerque"
+  },
+  "equipamentos": [
+    {
+      "categoria": "SENSOR_MOVIMENTO",
+      "acao": "AJUSTADO",
+      "serie": "SM-0910"
+    }
+  ],
+  "movimentacoes_estoque": [],
+  "cobranca": {
+    "cobrado": false
+  },
+  "comprovante_aceite": false,
+  "fotos": 3,
+  "nota_tecnico": "Visita de revisão programada. Limpei as lentes dos sensores e reapertei os suportes que estavam frouxos. Testes de disparo e comunicação concluídos sem falhas."
+}
