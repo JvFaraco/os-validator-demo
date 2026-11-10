@@ -20,7 +20,8 @@ RAIZ = Path(__file__).resolve().parents[1]
 
 IMAGENS = {
     "docs/analisar.svg": ["analisar", "data/ordens/os-0007.json"],
-    "docs/avaliar.svg": ["avaliar"],
+    # rodada real versionada, reexibida sem chamar a API
+    "docs/avaliar-haiku.svg": ["avaliar", "--de", "resultados/avaliacao-anthropic-claude-haiku-5-5.json"],
 }
 
 FONTE = 13

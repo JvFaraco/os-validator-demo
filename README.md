@@ -87,7 +87,7 @@ Outros comandos:
 ```bash
 python -m validador analisar data/ordens/os-0007.json   # o caminho completo de uma O.S.
 python -m validador analisar data/ordens/os-0029.json   # nota tentando dar ordem ao sistema
-pytest                                                  # 258 testes, todos offline
+pytest                                                  # 261 testes, todos offline
 ```
 
 Com o modelo de verdade (opcional):
@@ -107,36 +107,50 @@ correção e 10 para revisão humana. As 10 de revisão são os casos difíceis:
 vaga, dois atendimentos numa O.S., nota que contradiz o equipamento registrado,
 negação, equipamento fora do catálogo e uma tentativa de injeção.
 
-> [!IMPORTANT]
-> **O número do LLM ainda não foi medido.** Este repositório foi publicado sem
-> acesso a uma chave da API da Anthropic, então a tabela tem só a linha de base
-> offline. O comando para medir está logo acima. A rodada custa centavos com o
-> Haiku, e o relatório sai em `resultados/` com a resposta da IA para cada O.S.
+| Provedor | Decisão | Classificação | Chamadas à IA | Custo da rodada |
+| --- | --- | --- | --- | --- |
+| **Claude Haiku 5.5** (`claude-haiku-5-5`, padrão) | **38/38 (100%)** | **16/16 (100%)** | 24 | ~US$ 0,005 |
+| Claude Sonnet 5.5 (`claude-sonnet-5-5`) | 38/38 (100%) | 16/16 (100%) | 24 | ~US$ 0,106 |
+| Falso, por palavras-chave (linha de base) | 37/38 (97,4%) | 16/16 (100%) | 24 | US$ 0 |
 
-| Provedor | Decisão | Classificação | Custo da rodada |
-| --- | --- | --- | --- |
-| Falso, por palavras-chave (linha de base) | 37/38 (97,4%) | 16/16 (100%) | US$ 0 |
-| Claude Haiku 5.5 (`claude-haiku-5-5`, padrão) | não medido | não medido | — |
+![Avaliação com o Claude Haiku 5.5](docs/avaliar-haiku.svg)
 
-![Saída do comando avaliar com o provedor falso](docs/avaliar.svg)
+Foi uma rodada única de cada modelo, em 9/11/2026, com esforço `low`. Das 38
+O.S., só 24 chegaram à IA. As 12 com pendência pararam nas regras, uma parou na
+guarda de comando e outra por não ter combinação no catálogo. Os dois modelos
+tomaram a mesma decisão nas 38 O.S., e o Sonnet custou cerca de 20 vezes mais.
+Neste conjunto, o modelo mais barato bastou, e é por isso que ele é o padrão.
+Os relatórios, com a resposta do modelo para cada O.S., estão em
+[`resultados/`](resultados/) e podem ser reexibidos sem chave:
 
-**Como ler esses números.** O provedor falso não é IA: ele casa palavras-chave
-do catálogo com a nota. Fui eu quem escreveu as palavras-chave e as notas, então
-os 100% de classificação são otimistas por construção e servem só como linha de
-base. O único erro dele mostra o limite: na OS-0036 a nota diz que o cliente
-"achou que o sensor não detectava, mas o sensor estava bom". A palavra-chave
-pega "não detecta" e ignora a negação. É esse tipo de caso que um modelo de
-linguagem precisa resolver, e é nas 10 O.S. de revisão que o número dele vai
-se decidir.
+```bash
+python -m validador avaliar --de resultados/avaliacao-anthropic-claude-haiku-5-5.json
+```
+
+**Como ler esses números.** Um 100% em 38 casos fictícios, escritos pela mesma
+pessoa que escreveu o gabarito, não prova que o modelo acerta 100% em produção.
+Prova que este conjunto ficou fácil demais para separar um modelo bom de um
+ótimo. O que a rodada mostra de útil está nos detalhes:
+
+- **Onde o falso erra, o modelo acerta.** Na OS-0036 a nota diz que o cliente "achou que o sensor não detectava, mas o sensor estava bom". A palavra-chave pega "não detecta" e aprova a O.S. com a classificação errada. O Haiku se absteve e citou "o sistema era armado no modo errado".
+- **Abster-se no caso certo.** As 8 O.S. de revisão que chegaram ao modelo voltaram como `NENHUMA`, com o motivo certo: "não diz se a bateria trocada era da central ou de um sensor sem fio", "os equipamentos registrados são SIRENE", "descreve dois atendimentos".
+- **A trava do trecho citado funcionou com dado mascarado.** Na OS-0037 o modelo citou um trecho com `[TELEFONE]`, e a conferência contra a nota mascarada aceitou.
+- **O provedor falso não serve de régua.** Os 16/16 dele são otimistas por construção, porque fui eu quem escreveu as palavras-chave e as notas. Ele existe para o CI rodar offline e para mostrar o tipo de erro que só palavra-chave comete.
+
+O próximo passo para o número dizer mais seria um conjunto mais difícil: notas
+com erro de digitação, abreviação e áudio transcrito, rotuladas por outra
+pessoa, e mais de uma rodada por modelo, porque a saída de um LLM pode variar
+de uma execução para outra. Com um conjunto assim, a comparação entre Haiku e
+Sonnet passaria a dizer alguma coisa sobre qualidade, e não só sobre custo.
 
 - **Decisão:** caminho escolhido contra o gabarito, nas 38 O.S.
 - **Classificação:** combinação certa nas 16 O.S. que têm uma no gabarito. Se a IA se abstém onde havia resposta, conta como erro.
 - As regras também são conferidas contra o gabarito (38/38). Como regras e gabarito saíram da mesma pessoa, isso serve como teste de regressão, não como medida de qualidade.
 
-A rodada do provedor falso fica versionada em
-[`resultados/avaliacao-falso.json`](resultados/avaliacao-falso.json), e um teste
-falha se ela deixar de bater com uma rodada nova. As imagens deste README saem
-da saída real do CLI, por `python tools/gerar_print.py`.
+As três rodadas ficam versionadas em [`resultados/`](resultados/). Um teste
+recalcula as métricas de cada relatório a partir dos casos e do gabarito, e a
+rodada do provedor falso tem que bater com uma rodada nova. As imagens deste
+README saem da saída real do CLI, por `python tools/gerar_print.py`.
 
 ## Decisões técnicas
 
@@ -179,7 +193,7 @@ tools/gerar_print.py       gera as imagens do README
 
 ## Limites
 
-- **A confiança informada pelo modelo não é calibrada.** É uma autoavaliação, não uma probabilidade. O limiar ("baixa" vai para revisão) é só uma trava a mais, e não trato esse número como medida de certeza. Calibrar exigiria medir o acerto por faixa de confiança num volume real.
+- **A confiança informada pelo modelo não é calibrada.** É uma autoavaliação, não uma probabilidade. Nas rodadas, as mesmas O.S. vagas receberam "alta" do Haiku e "baixa" do Sonnet, com a mesma decisão. O limiar ("baixa" vai para revisão) é só uma trava a mais, e não trato esse número como medida de certeza. Calibrar exigiria medir o acerto por faixa de confiança num volume real.
 - **Amostra pequena e limpa.** São 38 casos escritos por mim. Notas reais têm erro de digitação, abreviação e áudio transcrito. Qualquer número aqui vale para estes dados e para o provedor usado, não para produção.
 - **A máscara do texto livre tem buraco.** Ela pega padrões (telefone, e-mail, CPF, CEP) e os dados pessoais da própria O.S. O nome de um terceiro citado na nota, como um vizinho ou o porteiro, passaria. A allowlist limita o estrago, mas não resolve.
 - **Uma combinação por O.S.** Uma O.S. com dois atendimentos diferentes vai para revisão em vez de receber duas classificações.

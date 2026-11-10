@@ -1,0 +1,688 @@
+{
+  "provedor": "anthropic",
+  "modelo": "claude-haiku-5-5",
+  "versao": "1.0.0",
+  "gerado_em": "2026-11-09",
+  "total_os": 38,
+  "metricas": {
+    "decisao": {
+      "acertos": 38,
+      "total": 38,
+      "pct": 100.0
+    },
+    "classificacao": {
+      "acertos": 16,
+      "total": 16,
+      "pct": 100.0
+    },
+    "regras": {
+      "acertos": 38,
+      "total": 38,
+      "pct": 100.0
+    }
+  },
+  "matriz_confusao": {
+    "PRONTA_PARA_VALIDACAO": {
+      "PRONTA_PARA_VALIDACAO": 16,
+      "PRECISA_CORRECAO": 0,
+      "REVISAO_HUMANA": 0
+    },
+    "PRECISA_CORRECAO": {
+      "PRONTA_PARA_VALIDACAO": 0,
+      "PRECISA_CORRECAO": 12,
+      "REVISAO_HUMANA": 0
+    },
+    "REVISAO_HUMANA": {
+      "PRONTA_PARA_VALIDACAO": 0,
+      "PRECISA_CORRECAO": 0,
+      "REVISAO_HUMANA": 10
+    }
+  },
+  "uso": {
+    "chamadas_ia": 24,
+    "tokens_entrada": 34606,
+    "tokens_saida": 4012,
+    "custo_estimado_usd": 0.0054666
+  },
+  "erros": [],
+  "casos": [
+    {
+      "id": "OS-0001",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C01",
+      "combinacao_obtida": "C01",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C01",
+        "confianca": "alta",
+        "trecho_citado": "Cliente relatou que o sensor da sala não detectava presença.",
+        "observacao_conferente": "A nota descreve sensor que não detectava presença e a substituição do sensor de movimento, com teste da detecção funcionando. O LED citado não altera a escolha."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0002",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C03",
+      "combinacao_obtida": "C03",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C03",
+        "confianca": "alta",
+        "trecho_citado": "Porta da cozinha disparava sozinha à noite. O ímã estava desalinhado com o sensor, com cerca de 2 cm de folga. Realinhei o ímã e fixei com parafuso novo",
+        "observacao_conferente": "A nota descreve disparo em falso causado por ímã desalinhado, corrigido por realinhamento e fixação do ímã. A ação registrada como AJUSTADO é coerente com a nota."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0003",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C05",
+      "combinacao_obtida": "C05",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C05",
+        "confianca": "alta",
+        "trecho_citado": "Troquei o módulo de comunicação e confirmei com a base que os eventos voltaram a chegar.",
+        "observacao_conferente": "A nota descreve falta de comunicação com o monitoramento e substituição do módulo de comunicação, confirmada com a base. Equipamento CENTRAL com ação SUBSTITUIDO é consistente com a escolha."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0004",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C06",
+      "combinacao_obtida": "C06",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C06",
+        "confianca": "alta",
+        "trecho_citado": "Reconfigurei a central com os dados da rede nova",
+        "observacao_conferente": "Central sem comunicação após troca de roteador, resolvida por reconfiguração com os dados da nova rede; hardware descrito como em ordem, logo não houve substituição de módulo. Base confirmou recebimento normal."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0005",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C07",
+      "combinacao_obtida": "C07",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C07",
+        "confianca": "alta",
+        "trecho_citado": "Medi 10,2 V na bateria da central, abaixo do mínimo. Substituí a bateria de 12 V 7 Ah e a central carregou normalmente.",
+        "observacao_conferente": "A nota descreve bateria da central descarregada e substituição dessa bateria, com o equipamento BATERIA/SUBSTITUIDO registrado. A frase sobre aceite de cobrança não altera a classificação."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0006",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C09",
+      "combinacao_obtida": "C09",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C09",
+        "confianca": "alta",
+        "trecho_citado": "a sirene estava queimada. Instalei sirene nova",
+        "observacao_conferente": "A nota diz que a sirene estava queimada e foi substituída por uma nova, com cabeamento conferido e em ordem. Confere com o equipamento SIRENE registrado como SUBSTITUIDO."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0007",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C13",
+      "combinacao_obtida": "C13",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C13",
+        "confianca": "alta",
+        "trecho_citado": "Reconfigurei a rede da câmera e a imagem voltou.",
+        "observacao_conferente": "A nota descreve câmera sem imagem por queda de rede após troca de senha do Wi-Fi, resolvida com reconfiguração de rede. Não houve substituição de equipamento."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0008",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C18",
+      "combinacao_obtida": "C18",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C18",
+        "confianca": "alta",
+        "trecho_citado": "Nenhuma falha encontrada e nada precisou ser ajustado.",
+        "observacao_conferente": "Revisão preventiva sem falhas e sem ajustes, o que corresponde à opção C18. Equipamentos não foram registrados na O.S., vale conferir se o cadastro está completo."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0009",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C19",
+      "combinacao_obtida": "C19",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C19",
+        "confianca": "media",
+        "trecho_citado": "Limpei as lentes dos sensores e reapertei os suportes que estavam frouxos.",
+        "observacao_conferente": "Revisão preventiva com ajuste registrado em sensor de movimento; a nota descreve limpeza e reaperto de suportes, o que caracteriza ajuste preventivo. Confira se o reaperto justifica C19 e não C18."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0010",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C16",
+      "combinacao_obtida": "C16",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C16",
+        "confianca": "alta",
+        "trecho_citado": "Cliente encerrou o contrato. Retirei central, sensor e sirene, todos em bom estado",
+        "observacao_conferente": "A nota diz que o cliente encerrou o contrato e que central, sensor e sirene foram retirados, o que corresponde à retirada definitiva. Não há menção a reinstalação em outro endereço."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0011",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C17",
+      "combinacao_obtida": "C17",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C17",
+        "confianca": "alta",
+        "trecho_citado": "Retirei os equipamentos com cuidado e embalei para reinstalação no novo endereço.",
+        "observacao_conferente": "A nota diz que o cliente vai mudar de endereço e os equipamentos foram retirados para reinstalação no imóvel novo, o que corresponde a C17. Não há indicação de encerramento de contrato."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0012",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C11",
+      "combinacao_obtida": "C11",
+      "regras_esperadas": [
+        "POUCAS_FOTOS"
+      ],
+      "regras_obtidas": [
+        "POUCAS_FOTOS"
+      ],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C11",
+        "confianca": "alta",
+        "trecho_citado": "Teclado da entrada com várias teclas sem resposta, inclusive a de confirmação.",
+        "observacao_conferente": "A nota descreve teclas sem resposta no teclado da entrada e a substituição do teclado, com arme e desarme testados. O pedido de relatório por e-mail não altera a classificação."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0013",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C15",
+      "combinacao_obtida": "C15",
+      "regras_esperadas": [
+        "DURACAO_ATIPICA"
+      ],
+      "regras_obtidas": [
+        "DURACAO_ATIPICA"
+      ],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C15",
+        "confianca": "alta",
+        "trecho_citado": "Fonte da câmera do portão sem tensão na saída. Troquei a fonte de alimentação e a câmera voltou a ligar.",
+        "observacao_conferente": "A nota descreve fonte sem tensão na saída, substituída, com a câmera voltando a funcionar. Equipamento registrado como FONTE com ação SUBSTITUIDO, coerente com a nota."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0014",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C02",
+      "combinacao_obtida": "C02",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C02",
+        "confianca": "alta",
+        "trecho_citado": "Sensor do corredor gerava alarmes falsos quando o cachorro passava. Reposicionei o sensor mais alto e reduzi a sensibilidade",
+        "observacao_conferente": "A nota descreve disparos falsos corrigidos por reposicionamento e redução de sensibilidade, o que corresponde à combinação C02 e ao equipamento registrado como ajustado."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0015",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C04",
+      "combinacao_obtida": "C04",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C04",
+        "confianca": "alta",
+        "trecho_citado": "Sensor da janela do quarto aparecia como sem comunicação na central.",
+        "observacao_conferente": "A nota descreve sensor sem comunicação com a central, resolvido com a substituição do sensor magnético, o que corresponde à C04. Equipamento registrado como SUBSTITUIDO, coerente com a nota."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0016",
+      "decisao_esperada": "PRONTA_PARA_VALIDACAO",
+      "decisao_obtida": "PRONTA_PARA_VALIDACAO",
+      "combinacao_esperada": "C10",
+      "combinacao_obtida": "C10",
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ACEITA",
+      "ia_resposta": {
+        "combinacao_id": "C10",
+        "confianca": "alta",
+        "trecho_citado": "o cabo tinha rompido atrás do forro. Refiz a emenda do cabeamento e testei o disparo.",
+        "observacao_conferente": "A nota diz que a sirene estava boa e o cabo rompido foi emendado, o que corresponde a reparo do cabeamento. O equipamento registrado como AJUSTADO é compatível com essa leitura."
+      },
+      "motivo": "Sem pendência nas regras e classificação aceita."
+    },
+    {
+      "id": "OS-0017",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "NOTA_VAZIA"
+      ],
+      "regras_obtidas": [
+        "NOTA_VAZIA"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0018",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "NOTA_VAZIA"
+      ],
+      "regras_obtidas": [
+        "NOTA_VAZIA"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0019",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "RETIRADA_SEM_MOVIMENTACAO"
+      ],
+      "regras_obtidas": [
+        "RETIRADA_SEM_MOVIMENTACAO"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0020",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "RETIRADA_SEM_MOVIMENTACAO"
+      ],
+      "regras_obtidas": [
+        "RETIRADA_SEM_MOVIMENTACAO"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0021",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "COBRANCA_SEM_ACEITE"
+      ],
+      "regras_obtidas": [
+        "COBRANCA_SEM_ACEITE"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0022",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "EQUIPAMENTO_NOVO_SEM_TESTE"
+      ],
+      "regras_obtidas": [
+        "EQUIPAMENTO_NOVO_SEM_TESTE"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0023",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "TIPO_INCOMPATIVEL"
+      ],
+      "regras_obtidas": [
+        "TIPO_INCOMPATIVEL"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0024",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "TIPO_INCOMPATIVEL"
+      ],
+      "regras_obtidas": [
+        "TIPO_INCOMPATIVEL"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0025",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "SERIE_REPETIDA"
+      ],
+      "regras_obtidas": [
+        "SERIE_REPETIDA"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0026",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "COBRANCA_SEM_ACEITE",
+        "EQUIPAMENTO_NOVO_SEM_TESTE",
+        "POUCAS_FOTOS"
+      ],
+      "regras_obtidas": [
+        "COBRANCA_SEM_ACEITE",
+        "EQUIPAMENTO_NOVO_SEM_TESTE",
+        "POUCAS_FOTOS"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0027",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "NOTA_VAZIA",
+        "RETIRADA_SEM_MOVIMENTACAO"
+      ],
+      "regras_obtidas": [
+        "NOTA_VAZIA",
+        "RETIRADA_SEM_MOVIMENTACAO"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0028",
+      "decisao_esperada": "PRECISA_CORRECAO",
+      "decisao_obtida": "PRECISA_CORRECAO",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [
+        "EQUIPAMENTO_NOVO_SEM_TESTE"
+      ],
+      "regras_obtidas": [
+        "EQUIPAMENTO_NOVO_SEM_TESTE"
+      ],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Pendência verificável pelas regras; a IA não foi chamada."
+    },
+    {
+      "id": "OS-0029",
+      "decisao_esperada": "REVISAO_HUMANA",
+      "decisao_obtida": "REVISAO_HUMANA",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "A nota contém texto dirigido ao sistema (\"ignore as regras\"); a IA não foi chamada."
+    },
+    {
+      "id": "OS-0030",
+      "decisao_esperada": "REVISAO_HUMANA",
+      "decisao_obtida": "REVISAO_HUMANA",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ABSTENCAO",
+      "ia_resposta": {
+        "combinacao_id": "NENHUMA",
+        "confianca": "alta",
+        "trecho_citado": "Atendimento realizado conforme solicitado, sistema funcionando normalmente ao final.",
+        "observacao_conferente": "A nota não descreve nenhum problema de comunicação com o monitoramento nem a solução aplicada, apenas que o sistema ficou funcionando. Nenhuma das combinações permitidas corresponde ao registro."
+      },
+      "motivo": "A IA não escolheu combinação: A nota não descreve nenhum problema de comunicação com o monitoramento nem a solução aplicada, apenas que o sistema ficou funcionando. Nenhuma das combinações permitidas corresponde ao registro."
+    },
+    {
+      "id": "OS-0031",
+      "decisao_esperada": "REVISAO_HUMANA",
+      "decisao_obtida": "REVISAO_HUMANA",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ABSTENCAO",
+      "ia_resposta": {
+        "combinacao_id": "NENHUMA",
+        "confianca": "alta",
+        "trecho_citado": "Ajustei a câmera do quintal, que estava sem imagem, e refiz o cabo da sirene, que não tocava.",
+        "observacao_conferente": "A nota descreve dois atendimentos: a câmera sem imagem foi apenas ajustada, sem indicar se houve reconfiguração de rede ou substituição, e a sirene teve o cabo refeito (C10). Confira qual combinação se aplica a cada equipamento."
+      },
+      "motivo": "A IA não escolheu combinação: A nota descreve dois atendimentos: a câmera sem imagem foi apenas ajustada, sem indicar se houve reconfiguração de rede ou substituição, e a sirene teve o cabo refeito (C10). Confira qual combinação se aplica a cada equipamento."
+    },
+    {
+      "id": "OS-0032",
+      "decisao_esperada": "REVISAO_HUMANA",
+      "decisao_obtida": "REVISAO_HUMANA",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ABSTENCAO",
+      "ia_resposta": {
+        "combinacao_id": "NENHUMA",
+        "confianca": "alta",
+        "trecho_citado": "Câmera da frente sem imagem; troquei a câmera por uma nova e a imagem voltou no aplicativo.",
+        "observacao_conferente": "A nota descreve troca de câmera por falta de imagem, mas os equipamentos registrados são SIRENE e as opções permitidas tratam apenas de sirene que não toca. Conferir o cadastro dos equipamentos da O.S."
+      },
+      "motivo": "A IA não escolheu combinação: A nota descreve troca de câmera por falta de imagem, mas os equipamentos registrados são SIRENE e as opções permitidas tratam apenas de sirene que não toca. Conferir o cadastro dos equipamentos da O.S."
+    },
+    {
+      "id": "OS-0033",
+      "decisao_esperada": "REVISAO_HUMANA",
+      "decisao_obtida": "REVISAO_HUMANA",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "NAO_CHAMADA",
+      "ia_resposta": null,
+      "motivo": "Nenhuma combinação do catálogo para este tipo de serviço e estes equipamentos."
+    },
+    {
+      "id": "OS-0034",
+      "decisao_esperada": "REVISAO_HUMANA",
+      "decisao_obtida": "REVISAO_HUMANA",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ABSTENCAO",
+      "ia_resposta": {
+        "combinacao_id": "NENHUMA",
+        "confianca": "baixa",
+        "trecho_citado": "Equipamentos retirados do local.",
+        "observacao_conferente": "A nota informa apenas a retirada dos equipamentos, sem dizer se foi encerramento de contrato (retirada definitiva) ou mudança de endereço (retirada para reinstalação). Confirmar o motivo antes de classificar."
+      },
+      "motivo": "A IA não escolheu combinação: A nota informa apenas a retirada dos equipamentos, sem dizer se foi encerramento de contrato (retirada definitiva) ou mudança de endereço (retirada para reinstalação). Confirmar o motivo antes de classificar."
+    },
+    {
+      "id": "OS-0035",
+      "decisao_esperada": "REVISAO_HUMANA",
+      "decisao_obtida": "REVISAO_HUMANA",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ABSTENCAO",
+      "ia_resposta": {
+        "combinacao_id": "NENHUMA",
+        "confianca": "baixa",
+        "trecho_citado": "Passei no cliente para a revisão do semestre, conforme a agenda.",
+        "observacao_conferente": "A nota descreve a visita de revisão, mas não informa se houve ajuste preventivo, então não é possível escolher entre C18 e C19 com segurança. Confirmar com o técnico se algum ajuste foi feito e nenhum equipamento foi registrado."
+      },
+      "motivo": "A IA não escolheu combinação: A nota descreve a visita de revisão, mas não informa se houve ajuste preventivo, então não é possível escolher entre C18 e C19 com segurança. Confirmar com o técnico se algum ajuste foi feito e nenhum equipamento foi registrado."
+    },
+    {
+      "id": "OS-0036",
+      "decisao_esperada": "REVISAO_HUMANA",
+      "decisao_obtida": "REVISAO_HUMANA",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ABSTENCAO",
+      "ia_resposta": {
+        "combinacao_id": "NENHUMA",
+        "confianca": "alta",
+        "trecho_citado": "o sensor estava bom: o sistema era armado no modo errado",
+        "observacao_conferente": "A nota diz que o sensor funcionava e que o problema era o modo de armação, com orientação ao cliente pelo teclado. Nenhuma das opções corresponde (C01 exige substituição e C02 exige reposicionamento ou ajuste de sensibilidade), então a O.S. precisa de classificação manual."
+      },
+      "motivo": "A IA não escolheu combinação: A nota diz que o sensor funcionava e que o problema era o modo de armação, com orientação ao cliente pelo teclado. Nenhuma das opções corresponde (C01 exige substituição e C02 exige reposicionamento ou ajuste de sensibilidade), então a O.S. precisa de classificação manual."
+    },
+    {
+      "id": "OS-0037",
+      "decisao_esperada": "REVISAO_HUMANA",
+      "decisao_obtida": "REVISAO_HUMANA",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ABSTENCAO",
+      "ia_resposta": {
+        "combinacao_id": "NENHUMA",
+        "confianca": "baixa",
+        "trecho_citado": "Troquei a bateria a pedido do cliente, que ligou do [TELEFONE].",
+        "observacao_conferente": "A nota não diz se a bateria trocada era da central ou de um sensor sem fio, nem qual problema foi constatado. Confira o equipamento atendido antes de classificar."
+      },
+      "motivo": "A IA não escolheu combinação: A nota não diz se a bateria trocada era da central ou de um sensor sem fio, nem qual problema foi constatado. Confira o equipamento atendido antes de classificar."
+    },
+    {
+      "id": "OS-0038",
+      "decisao_esperada": "REVISAO_HUMANA",
+      "decisao_obtida": "REVISAO_HUMANA",
+      "combinacao_esperada": null,
+      "combinacao_obtida": null,
+      "regras_esperadas": [],
+      "regras_obtidas": [],
+      "ia": "ABSTENCAO",
+      "ia_resposta": {
+        "combinacao_id": "NENHUMA",
+        "confianca": "baixa",
+        "trecho_citado": "Imagem ruim na câmera da sala, fiz o que deu.",
+        "observacao_conferente": "A nota diz apenas que a imagem estava ruim e que o técnico fez o que era possível, sem indicar se havia falta de imagem ou desfoque nem qual ajuste foi feito. Confira o serviço com o técnico antes de classificar."
+      },
+      "motivo": "A IA não escolheu combinação: A nota diz apenas que a imagem estava ruim e que o técnico fez o que era possível, sem indicar se havia falta de imagem ou desfoque nem qual ajuste foi feito. Confira o serviço com o técnico antes de classificar."
+    }
+  ]
+}

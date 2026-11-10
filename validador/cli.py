@@ -3,11 +3,13 @@
     python -m validador analisar data/ordens/os-0007.json
     python -m validador avaliar
     python -m validador avaliar --provedor anthropic --modelo claude-haiku-5-5 --salvar
+    python -m validador avaliar --de resultados/avaliacao-anthropic-claude-haiku-5-5.json
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -36,6 +38,8 @@ def _parser() -> argparse.ArgumentParser:
     v = sub.add_parser("avaliar", parents=[comum], help="roda todas as O.S. contra o gabarito")
     v.add_argument("--salvar", nargs="?", const="", default=None, metavar="ARQUIVO",
                    help="grava o relatório em JSON (padrão: resultados/avaliacao-<provedor>[-<modelo>].json)")
+    v.add_argument("--de", type=Path, default=None, metavar="ARQUIVO",
+                   help="só exibe um relatório já salvo (ex.: a rodada real versionada), sem chamar provedor")
     return p
 
 
@@ -45,6 +49,10 @@ def main(argv: list[str] | None = None) -> int:
             fluxo.reconfigure(encoding="utf-8")
     args = _parser().parse_args(argv)
     cor = usar_cor(args.cor)
+
+    if args.comando == "avaliar" and args.de:
+        print(formatar_avaliacao(json.loads(args.de.read_text(encoding="utf-8")), cor))
+        return 0
 
     if args.modelo and args.provedor != "anthropic":
         print("--modelo só vale com --provedor anthropic.", file=sys.stderr)
