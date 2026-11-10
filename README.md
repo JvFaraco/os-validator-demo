@@ -10,7 +10,7 @@ técnico, e mesmo assim escolhe dentro de um catálogo fechado. A decisão final
 ![Saída do comando analisar para a OS-0007](docs/analisar.svg)
 
 > **Demonstração com dados 100% fictícios.** É inspirada num sistema real que
-> mantenho em produção, que já processou mais de 1.900 ordens de serviço desde
+> mantenho em produção, que já processou mais de 2.300 ordens de serviço desde
 > setembro de 2026 e tem 2.222 testes automatizados. O desenho é o mesmo; o
 > código, o domínio, o catálogo, as regras e as O.S. foram escritos do zero
 > para este repositório.
