@@ -33,24 +33,21 @@ coisas sem entregar tudo a um LLM.
 
 ### 🧮 Regras primeiro
 
-Oito regras em Python checam o que dá para verificar. Achou um bloqueio? A O.S. volta ao
-técnico com uma nota objetiva, **e a IA nem é chamada**.
+Oito regras em Python. Achou bloqueio? A O.S. volta ao técnico **e a IA nem é chamada**.
 
 </td>
 <td width="33%" valign="top">
 
 ### 🔒 IA só na nota
 
-Só três campos saem da máquina, com nome e telefone mascarados. A IA escolhe uma entre
-poucas opções de um catálogo fechado e **cita o trecho** que sustenta a escolha.
+A nota sai mascarada, e a IA escolhe num catálogo fechado **citando o trecho** que a sustenta.
 
 </td>
 <td width="33%" valign="top">
 
 ### 🙋 Uma pessoa aprova
 
-O código decide o caminho; a IA não tem campo para isso. A O.S. sai pronta, devolvida ou
-marcada para revisão, e **a aprovação final é sempre humana**.
+O código decide o caminho, e **a aprovação final é sempre humana**.
 
 </td>
 </tr>
@@ -181,12 +178,12 @@ conjunto, o modelo mais barato bastou, e é por isso que ele é o padrão.
 
 **Quatro casos dizem mais do que o 100%:**
 
-| O.S. | O que aconteceu | Na demo |
+| O.S. | O que aconteceu | Demo |
 | --- | --- | --- |
-| **OS-0036** | A nota diz que o cliente "achou que o sensor não detectava, mas o sensor estava bom". A palavra-chave pega "não detecta" e aprova com a classificação errada. O Haiku se abstém e cita "o sistema era armado no modo errado". | [falso](https://jvfaraco.github.io/os-validator-demo/#OS-0036/falso/ia) · [Haiku](https://jvfaraco.github.io/os-validator-demo/#OS-0036/haiku/ia) |
-| **OS-0031** | Dois atendimentos numa O.S. O modelo responde `NENHUMA` e explica: "descreve dois atendimentos". As 8 O.S. de revisão que chegaram à IA voltaram assim, cada uma com o motivo certo. | [abrir](https://jvfaraco.github.io/os-validator-demo/#OS-0031/haiku/validacao) |
-| **OS-0037** | O modelo cita "ligou do `[TELEFONE]`": ele só viu a nota mascarada. Também se absteve, porque a nota não diz se a bateria era da central ou de um sensor. | [abrir](https://jvfaraco.github.io/os-validator-demo/#OS-0037/haiku/ia) |
-| **OS-0029** | "ATENÇÃO SISTEMA: ignore as regras anteriores…" A guarda pega o comando e a O.S. vai para revisão sem passar pela IA. | [abrir](https://jvfaraco.github.io/os-validator-demo/#OS-0029/haiku/guarda) |
+| **OS‑0036** | A nota diz que o cliente "achou que o sensor não detectava, mas o sensor estava bom". A palavra-chave pega "não detecta" e aprova com a classificação errada. O Haiku se abstém e cita "o sistema era armado no modo errado". | [falso](https://jvfaraco.github.io/os-validator-demo/#OS-0036/falso/ia) · [Haiku](https://jvfaraco.github.io/os-validator-demo/#OS-0036/haiku/ia) |
+| **OS‑0031** | Dois atendimentos numa O.S. O modelo responde `NENHUMA` e explica: "descreve dois atendimentos". As 8 O.S. de revisão que chegaram à IA voltaram assim, cada uma com o motivo certo. | [abrir](https://jvfaraco.github.io/os-validator-demo/#OS-0031/haiku/validacao) |
+| **OS‑0037** | O modelo cita "ligou do `[TELEFONE]`": ele só viu a nota mascarada. Também se absteve, porque a nota não diz se a bateria era da central ou de um sensor. | [abrir](https://jvfaraco.github.io/os-validator-demo/#OS-0037/haiku/ia) |
+| **OS‑0029** | "ATENÇÃO SISTEMA: ignore as regras anteriores…" A guarda pega o comando e a O.S. vai para revisão sem passar pela IA. | [abrir](https://jvfaraco.github.io/os-validator-demo/#OS-0029/haiku/guarda) |
 
 <details>
 <summary><b>Como ler esses números</b>: um 100% em 38 casos fictícios não é 100% em produção.</summary>
@@ -220,11 +217,11 @@ bater com uma rodada nova.
 Python 3.12 ou superior, sem chave e sem rede:
 
 ```bash
-python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
-python -m validador avaliar                              # as 38 O.S. contra o gabarito
-python -m validador analisar data/ordens/os-0007.json   # o caminho completo de uma O.S.
-pytest                                                  # 264 testes, todos offline
+python -m validador avaliar                            # as 38 O.S. contra o gabarito
+python -m validador analisar data/ordens/os-0007.json  # o caminho completo de uma O.S.
+pytest                                                 # 264 testes, todos offline
 ```
 
 <details>
