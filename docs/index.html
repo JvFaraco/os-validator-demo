@@ -1,0 +1,1193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validador de O.S. com IA · demo interativa</title>
+<meta name="description" content="Escolha uma das 38 O.S. fictícias e veja por onde ela passa: regras em Python, catálogo fechado, sanitização, IA e validação local. Respostas reais da rodada de 9/11/2026, sem chamar a API.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d1117'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%237ee787' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>
+  // Tema escolhido antes de pintar, para não piscar.
+  try { const t = localStorage.getItem("tema"); if (t === "claro" || t === "escuro") document.documentElement.dataset.theme = t === "claro" ? "light" : "dark"; } catch (e) {}
+</script>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface: #f6f8fa;
+  --surface-2: #eaeef2;
+  --border: #d0d7de;
+  --border-strong: #8c959f;
+  --text: #1f2328;
+  --muted: #59636e;
+  --accent: #1b7c83;
+  --pronta: #1a7f37;
+  --correcao: #cf222e;
+  --revisao: #9a6700;
+  --ia: #0969da;
+  --pessoal: #8250df;
+  --pronta-bg: #dafbe1;
+  --correcao-bg: #ffebe9;
+  --revisao-bg: #fff8c5;
+  --ia-bg: #ddf4ff;
+  --pessoal-bg: #fbefff;
+  --pronta-tx: #116329;
+  --correcao-tx: #a40e26;
+  --revisao-tx: #7d4e00;
+  --focus: #0969da;
+  --sombra: 0 1px 2px rgb(31 35 40 / .06), 0 8px 24px rgb(31 35 40 / .06);
+
+  --r: 10px;
+  --r-sm: 6px;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+  --dur-1: 120ms; --dur-2: 220ms; --dur-3: 520ms;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Ubuntu, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0d1117; --surface: #161b22; --surface-2: #21262d; --border: #30363d; --border-strong: #6e7681;
+    --text: #e6edf3; --muted: #9198a1; --accent: #56d4dd;
+    --pronta: #7ee787; --correcao: #ff7b72; --revisao: #e3b341; --ia: #79c0ff; --pessoal: #d2a8ff;
+    --pronta-bg: #12261e; --correcao-bg: #2d1416; --revisao-bg: #2b2111; --ia-bg: #0f2240; --pessoal-bg: #2a1d3f;
+    --pronta-tx: #7ee787; --correcao-tx: #ff7b72; --revisao-tx: #e3b341;
+    --focus: #79c0ff; --sombra: 0 1px 2px rgb(0 0 0 / .3), 0 8px 24px rgb(0 0 0 / .25);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0d1117; --surface: #161b22; --surface-2: #21262d; --border: #30363d; --border-strong: #6e7681;
+  --text: #e6edf3; --muted: #9198a1; --accent: #56d4dd;
+  --pronta: #7ee787; --correcao: #ff7b72; --revisao: #e3b341; --ia: #79c0ff; --pessoal: #d2a8ff;
+  --pronta-bg: #12261e; --correcao-bg: #2d1416; --revisao-bg: #2b2111; --ia-bg: #0f2240; --pessoal-bg: #2a1d3f;
+    --pronta-tx: #7ee787; --correcao-tx: #ff7b72; --revisao-tx: #e3b341;
+  --focus: #79c0ff; --sombra: 0 1px 2px rgb(0 0 0 / .3), 0 8px 24px rgb(0 0 0 / .25);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 var(--font);
+  transition: background-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out);
+}
+a { color: var(--ia); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+code, pre, .mono { font-family: var(--mono); font-size: .875em; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: var(--r-sm); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.pagina { max-width: 1320px; margin: 0 auto; padding: 0 var(--s4) var(--s7); }
+
+/* ---------- topo ---------- */
+.topo { padding: var(--s5) 0 var(--s5); }
+.topo__barra { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; }
+.marca { font: 600 14px/1 var(--mono); color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: var(--s2); }
+.marca:hover { color: var(--text); }
+.marca__ponto { width: 10px; height: 10px; border-radius: 50%; background: var(--pronta); box-shadow: 0 0 0 3px var(--pronta-bg); }
+.topo__links { display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
+.botao {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  min-height: 36px; padding: 6px 12px;
+  border: 1px solid var(--border); border-radius: var(--r-sm);
+  background: var(--surface); color: var(--text);
+  font: 500 14px/1.2 var(--font); text-decoration: none; cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out);
+}
+.botao:hover { background: var(--surface-2); border-color: var(--border-strong); text-decoration: none; }
+.botao:active { transform: translateY(1px); }
+.botao svg { width: 16px; height: 16px; flex: none; }
+.botao[disabled] { opacity: .5; cursor: not-allowed; }
+.icone-sol { display: none; }
+:root[data-theme="dark"] .icone-sol { display: block; }
+:root[data-theme="dark"] .icone-lua { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .icone-sol { display: block; }
+  :root:not([data-theme="light"]) .icone-lua { display: none; }
+}
+h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; letter-spacing: -.02em; margin: var(--s5) 0 var(--s3); text-wrap: balance; }
+.lead { margin: 0; max-width: 72ch; color: var(--muted); font-size: 17px; text-wrap: pretty; }
+.lead strong { color: var(--text); font-weight: 600; }
+
+/* ---------- grade principal ---------- */
+.grade { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s5); align-items: start; }
+@media (min-width: 1180px) {
+  .grade { grid-template-columns: 300px minmax(0, 1fr); }
+  .lateral { position: sticky; top: var(--s4); max-height: calc(100vh - 2 * var(--s4)); overflow: auto; overscroll-behavior: contain; padding-right: var(--s2); scrollbar-gutter: stable; }
+}
+.cartao { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); }
+
+/* ---------- lateral: provedor, métricas, destaques, todas ---------- */
+.lateral { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s4); align-content: start; min-width: 0; }
+.bloco h2 { font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 0 0 var(--s2); }
+.segmentos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 3px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); margin: 0; }
+.segmentos legend { padding: 0; }
+.segmentos label { position: relative; }
+.segmentos input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.segmentos span {
+  display: block; text-align: center; padding: 7px 4px; border-radius: 4px;
+  font-size: 13px; font-weight: 500; color: var(--muted); line-height: 1.25;
+  transition: background-color var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out);
+}
+.segmentos label:hover span { color: var(--text); }
+.segmentos input:checked + span { background: var(--bg); color: var(--text); box-shadow: 0 0 0 1px var(--border), 0 1px 2px rgb(0 0 0 / .08); }
+.segmentos input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 1px; }
+.nota-provedor { font-size: 13px; color: var(--muted); margin: var(--s2) 0 0; }
+
+.metricas { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-sm); overflow: hidden; margin: 0; }
+.metricas div { background: var(--surface); padding: var(--s2) var(--s3); }
+.metricas dt { font-size: 12px; color: var(--muted); }
+.metricas dd { margin: 0; font: 600 17px/1.3 var(--mono); font-variant-numeric: tabular-nums; }
+.metricas dd small { font: 400 12px var(--font); color: var(--muted); }
+.erros-provedor { font-size: 13px; margin: var(--s2) 0 0; color: var(--muted); }
+.link-os { font: 600 13px var(--mono); color: var(--correcao); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+.destaques { display: grid; gap: var(--s2); list-style: none; margin: 0; padding: 0; }
+.destaque {
+  display: grid; grid-template-columns: auto 1fr; gap: 2px var(--s3); align-items: baseline;
+  width: 100%; text-align: left; padding: var(--s2) var(--s3);
+  border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); color: inherit; font: inherit; cursor: pointer;
+  transition: border-color var(--dur-1) var(--ease-out), background-color var(--dur-1) var(--ease-out);
+}
+.destaque:hover { border-color: var(--border-strong); background: var(--surface-2); }
+.destaque[aria-current="true"] { border-color: var(--cor, var(--accent)); box-shadow: inset 3px 0 0 var(--cor, var(--accent)); }
+.destaque__id { font: 600 12px var(--mono); color: var(--cor-tx, var(--muted)); grid-row: span 2; align-self: start; padding-top: 2px; }
+.destaque__titulo { font-size: 14px; font-weight: 600; line-height: 1.3; }
+.destaque__texto { font-size: 13px; color: var(--muted); line-height: 1.4; }
+
+.bloco--todas summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: var(--s2); border-radius: var(--r-sm); }
+.bloco--todas summary::-webkit-details-marker { display: none; }
+.bloco--todas summary::after { content: ""; width: 7px; height: 7px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(-45deg); margin: 0 0 var(--s2) 2px; transition: transform var(--dur-1) var(--ease-out); }
+.bloco--todas[open] summary::after { transform: rotate(45deg); }
+.bloco--todas[open] summary { margin-bottom: 2px; }
+.todas { border: 0; padding: 0; margin: 0; display: grid; gap: var(--s3); }
+.grupo h3 { font-size: 13px; font-weight: 600; margin: 0 0 6px; display: flex; align-items: center; gap: 6px; }
+.grupo h3 .conta { color: var(--muted); font-weight: 400; font-family: var(--mono); }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip__rotulo {
+  display: inline-flex; align-items: center; gap: 5px;
+  min-height: 30px; padding: 4px 8px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg);
+  font: 500 12px/1 var(--mono); color: var(--text);
+  transition: background-color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out);
+}
+.chip__rotulo::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--cor); flex: none; }
+.chip:hover .chip__rotulo { border-color: var(--border-strong); }
+.chip input:checked + .chip__rotulo { border-color: var(--cor); background: var(--cor-bg); box-shadow: 0 0 0 1px var(--cor); }
+.chip input:focus-visible + .chip__rotulo { outline: 2px solid var(--focus); outline-offset: 2px; }
+.chip.diverge .chip__rotulo::after { content: "✗"; color: var(--correcao); font-weight: 700; margin-left: -1px; }
+.legenda-chips { font-size: 12px; color: var(--muted); margin: 0; }
+
+[data-caminho="PRONTA_PARA_VALIDACAO"] { --cor: var(--pronta); --cor-bg: var(--pronta-bg); --cor-tx: var(--pronta-tx); }
+[data-caminho="PRECISA_CORRECAO"] { --cor: var(--correcao); --cor-bg: var(--correcao-bg); --cor-tx: var(--correcao-tx); }
+[data-caminho="REVISAO_HUMANA"] { --cor: var(--revisao); --cor-bg: var(--revisao-bg); --cor-tx: var(--revisao-tx); }
+
+/* ---------- palco: caso, fluxo e detalhe ---------- */
+.palco { min-width: 0; }
+.caso { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; margin-bottom: var(--s4); }
+.caso h2 { margin: 0; font-size: 22px; line-height: 1.25; letter-spacing: -.01em; display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
+.caso h2 .mono { font-size: 20px; }
+.caso__gabarito { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.caso__gabarito .nao-bateu { color: var(--correcao-tx); font-weight: 600; }
+.caso__nav { display: flex; gap: var(--s2); }
+.selo {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: 999px; border: 1px solid var(--cor, var(--border));
+  background: var(--cor-bg, var(--surface)); color: var(--cor-tx, var(--text));
+  font: 600 12px/1.3 var(--mono); white-space: nowrap;
+}
+
+.palco__corpo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s5); align-items: start; }
+@media (min-width: 800px) {
+  .palco__corpo { grid-template-columns: minmax(320px, 430px) minmax(0, 1fr); }
+  .palco__detalhe { position: sticky; top: var(--s4); }
+}
+
+.fluxo { position: relative; padding-right: 26px; }
+.fluxo__linhas { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+.fluxo__linhas path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.linha-base { stroke: var(--border); stroke-width: 2; }
+.linha-progresso { stroke: var(--accent); stroke-width: 3; }
+.linha-desvio { stroke: var(--cor, var(--revisao)); stroke-width: 2.5; }
+.seta { fill: var(--cor, var(--revisao)); }
+.pulso { fill: var(--accent); filter: drop-shadow(0 0 6px var(--accent)); opacity: 0; }
+
+.etapas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; position: relative; z-index: 1; }
+.etapa { position: relative; min-width: 0; }
+.no {
+  display: grid; grid-template-columns: 30px minmax(0, 1fr); align-items: center; gap: var(--s3);
+  width: 100%; min-height: 60px; text-align: left; padding: 9px 12px;
+  border: 1px solid var(--border); border-radius: var(--r);
+  background: var(--surface); color: inherit; font: inherit; cursor: pointer;
+  transition: border-color var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+.no:hover { border-color: var(--border-strong); }
+.no__num {
+  width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+  font: 700 13px/1 var(--mono); background: var(--bg); color: var(--muted);
+  border: 2px solid var(--border-strong);
+  transition: background-color var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out);
+}
+.no__corpo { min-width: 0; }
+.no__topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px var(--s2); }
+.no__nome { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 15px; line-height: 1.3; }
+.no__estado { display: block; font: 13px/1.4 var(--mono); color: var(--muted); overflow-wrap: anywhere; margin-top: 2px; }
+.tag-ia { font: 700 11px/1 var(--mono); letter-spacing: .06em; padding: 3px 5px; border-radius: 4px; color: var(--ia); background: var(--ia-bg); border: 1px solid currentColor; }
+.saida {
+  font: 500 12px/1.25 var(--mono); padding: 2px 7px; border-radius: 999px;
+  border: 1px dashed var(--border-strong); color: var(--muted); background: var(--bg); white-space: nowrap;
+  transition: color var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out), background-color var(--dur-2) var(--ease-out);
+}
+.saida b { font-weight: 700; }
+
+.etapa.is-feito .no__num { border-color: var(--accent); color: var(--accent); }
+.etapa.is-feito[data-etapa="ia"] .no__num { border-color: var(--ia); color: var(--ia); }
+.etapa.is-parada .no, .etapa.is-final .no { border-color: var(--cor); background: var(--cor-bg); }
+.etapa.is-parada .no__num, .etapa.is-final .no__num { border-color: var(--cor); background: var(--cor); color: var(--bg); }
+.etapa.is-parada .no__estado, .etapa.is-final .no__estado { color: var(--cor-tx); font-weight: 600; }
+.etapa.is-parada .saida { border-style: solid; border-color: var(--cor); color: var(--cor-tx); background: var(--bg); font-weight: 700; }
+.etapa.is-pulado .no { background: transparent; border-style: dashed; }
+.etapa.is-pulado .no__nome { color: var(--muted); font-weight: 500; }
+.etapa.is-pulado .no__num { border-style: dashed; }
+.etapa.is-atual .no { box-shadow: 0 0 0 2px var(--text); }
+.etapa .no:focus-visible { outline-offset: 4px; border-radius: var(--r); }
+
+.fluxo.is-percorrendo .no,
+.fluxo.is-percorrendo .no__num,
+.fluxo.is-percorrendo .saida { transition-delay: calc(var(--i) * 55ms); }
+
+.pessoa {
+  margin-top: 10px; margin-right: 26px; display: flex; align-items: center; gap: var(--s3);
+  padding: var(--s3); border-radius: var(--r); border: 1px solid var(--border); background: var(--bg);
+  font-size: 14px; color: var(--muted); position: relative;
+}
+.pessoa::before { content: ""; position: absolute; left: 26px; top: -11px; height: 10px; border-left: 2px solid var(--border); }
+.legenda-fluxo { font-size: 13px; color: var(--muted); margin: 0 0 var(--s3); }
+.legenda-fluxo .saida { display: inline-block; }
+.pessoa svg { width: 28px; height: 28px; flex: none; color: var(--text); }
+.pessoa strong { color: var(--text); }
+
+/* detalhe */
+.detalhe { padding: var(--s4) var(--s5) var(--s5); box-shadow: var(--sombra); scroll-margin-top: var(--s4); }
+.etapa > .detalhe { margin-top: var(--s2); padding: var(--s4); }
+.detalhe__topo { display: flex; justify-content: space-between; align-items: center; gap: var(--s2); flex-wrap: wrap; font: 12px var(--mono); color: var(--muted); }
+.detalhe h3 { margin: 6px 0 4px; font-size: 20px; line-height: 1.3; letter-spacing: -.01em; }
+.detalhe .detalhe__faz { margin: 0 0 var(--s4); color: var(--muted); font-size: 14px; text-wrap: pretty; }
+.detalhe__conteudo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s4); }
+.detalhe__conteudo > *, .lado-a-lado > * { min-width: 0; }
+.detalhe__conteudo.entra { animation: entra var(--dur-2) var(--ease-out); }
+@keyframes entra { from { opacity: 0; transform: translateY(4px); } }
+.detalhe h4 { margin: 0 0 6px; font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: .03em; text-transform: uppercase; }
+.detalhe p { margin: 0; }
+.detalhe__nav { display: flex; justify-content: space-between; gap: var(--s2); margin-top: var(--s5); padding-top: var(--s4); border-top: 1px solid var(--border); }
+
+.aviso-caixa { padding: var(--s3); border-radius: var(--r-sm); border: 1px solid var(--cor, var(--border)); background: var(--cor-bg, var(--bg)); }
+.aviso-caixa strong { color: var(--cor-tx, var(--text)); }
+.neutro { padding: var(--s3); border-radius: var(--r-sm); border: 1px dashed var(--border-strong); color: var(--muted); font-size: 14px; }
+
+.codigo {
+  margin: 0; padding: var(--s3); border-radius: var(--r-sm); background: var(--bg); border: 1px solid var(--border);
+  font: 12.5px/1.6 var(--mono); overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2; max-height: 440px;
+}
+.codigo .k { color: var(--ia); }
+.codigo .s { color: var(--pronta); }
+.codigo .n { color: var(--revisao); }
+.codigo .b { color: var(--correcao); }
+.codigo .linha { display: block; margin: 0 calc(-1 * var(--s3)); padding: 0 var(--s3); }
+.codigo .linha.vai { background: var(--ia-bg); box-shadow: inset 3px 0 0 var(--ia); }
+.codigo .pii { color: var(--pessoal); font-weight: 600; }
+.legenda { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); font-size: 13px; color: var(--muted); }
+.legenda span { display: inline-flex; align-items: center; gap: 6px; }
+.legenda i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+.legenda .l-vai { background: var(--ia-bg); box-shadow: inset 3px 0 0 var(--ia); }
+.legenda .l-pii { background: var(--pessoal-bg); border: 1px solid var(--pessoal); }
+
+.nota { margin: 0; padding: var(--s3); border-radius: var(--r-sm); background: var(--bg); border: 1px solid var(--border); font-size: 14.5px; line-height: 1.6; overflow-wrap: anywhere; }
+.nota mark { color: inherit; border-radius: 3px; padding: 0 2px; }
+.nota .mk { background: var(--pessoal-bg); color: var(--pessoal); font: 600 .9em var(--mono); box-shadow: 0 0 0 1px var(--pessoal); }
+.nota .pii { background: var(--pessoal-bg); box-shadow: inset 0 -2px 0 var(--pessoal); }
+.nota .trecho { background: var(--pronta-bg); box-shadow: inset 0 -2px 0 var(--pronta); }
+.nota .comando { background: var(--correcao-bg); box-shadow: inset 0 -2px 0 var(--correcao); font-weight: 600; }
+.lado-a-lado { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s3); }
+@media (min-width: 1000px) { .lado-a-lado { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+.regras { list-style: none; margin: 0; padding: 0; border: 1px solid var(--border); border-radius: var(--r-sm); overflow: hidden; }
+.regra { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 2px var(--s2); padding: 8px var(--s3); align-items: baseline; background: var(--bg); }
+.regra + .regra { border-top: 1px solid var(--border); }
+.regra__icone { font: 700 14px var(--mono); text-align: center; color: var(--pronta); }
+.regra code { font-size: 12.5px; font-weight: 600; overflow-wrap: anywhere; }
+.regra__sev { font: 12px var(--mono); color: var(--muted); text-transform: lowercase; }
+.regra__desc { grid-column: 2 / -1; font-size: 13px; color: var(--muted); }
+.regra__msg { grid-column: 2 / -1; font-size: 14px; }
+.regra__ev { grid-column: 2 / -1; font: 12px var(--mono); color: var(--muted); overflow-wrap: anywhere; }
+.regra.bloqueio { background: var(--correcao-bg); }
+.regra.bloqueio .regra__icone, .regra.bloqueio code { color: var(--correcao-tx); }
+.regra.aviso { background: var(--revisao-bg); }
+.regra.aviso .regra__icone, .regra.aviso code { color: var(--revisao-tx); }
+
+.opcoes { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.opcao { display: grid; grid-template-columns: auto 1fr; gap: var(--s3); align-items: baseline; padding: 8px var(--s3); border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--bg); font-size: 14px; }
+.opcao code { font-weight: 700; color: var(--ia); }
+.opcao.escolhida { border-color: var(--pronta); background: var(--pronta-bg); box-shadow: inset 3px 0 0 var(--pronta); }
+.opcao.escolhida::after { content: "escolhida"; grid-column: 2; font: 600 12px var(--mono); color: var(--pronta-tx); }
+.opcao.nenhuma code { color: var(--revisao); }
+.opcao.nenhuma.escolhida { border-color: var(--revisao); background: var(--revisao-bg); box-shadow: inset 3px 0 0 var(--revisao); }
+.opcao.nenhuma.escolhida::after { content: "escolhida: abstenção"; color: var(--revisao-tx); }
+
+.pilulas { display: flex; flex-wrap: wrap; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.pilulas li { font: 12px/1.3 var(--mono); padding: 3px 7px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg); color: var(--muted); }
+.pilulas li.mk { color: var(--pessoal); border-color: var(--pessoal); background: var(--pessoal-bg); font-weight: 600; }
+
+.resposta { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-sm); overflow: hidden; margin: 0; }
+.resposta div { display: grid; grid-template-columns: minmax(0, 170px) minmax(0, 1fr); gap: var(--s3); padding: 8px var(--s3); background: var(--bg); }
+@media (max-width: 520px) { .resposta div { grid-template-columns: 1fr; gap: 2px; } }
+.resposta dt { font: 600 12.5px var(--mono); color: var(--ia); overflow-wrap: anywhere; }
+.resposta dd { margin: 0; font-size: 14px; overflow-wrap: anywhere; }
+
+.conferencias { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.conferencias li { display: flex; gap: var(--s2); align-items: baseline; font-size: 14.5px; }
+.conferencias .marca-c { font: 700 14px var(--mono); width: 18px; flex: none; text-align: center; }
+.conferencias .ok .marca-c { color: var(--pronta); }
+.conferencias .falha { color: var(--text); font-weight: 600; }
+.conferencias .falha .marca-c { color: var(--revisao-tx); }
+.conferencias .pendente { color: var(--muted); }
+
+.decisao-grande { display: grid; gap: 6px; padding: var(--s4); border-radius: var(--r); border: 1px solid var(--cor); background: var(--cor-bg); }
+.decisao-grande .caminho { font: 700 clamp(16px, 2.2vw, 20px)/1.2 var(--mono); color: var(--cor-tx); overflow-wrap: anywhere; }
+.decisao-grande .comb { font-size: 15px; font-weight: 600; }
+.texto-pre { white-space: pre-line; }
+.bateu { font-size: 14px; display: flex; gap: var(--s2); align-items: baseline; }
+.bateu .marca-c { font: 700 14px var(--mono); }
+.bateu.sim .marca-c { color: var(--pronta); }
+.bateu.nao .marca-c { color: var(--correcao); }
+ul.lista { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; font-size: 14.5px; }
+
+.rodape { margin-top: var(--s7); padding-top: var(--s5); border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; display: grid; gap: var(--s2); }
+.rodape p { margin: 0; max-width: 80ch; }
+.estado-carga { padding: var(--s6); text-align: center; color: var(--muted); }
+
+@media (max-width: 799px) {
+  .palco__detalhe { display: none; }
+}
+@media (max-width: 1179px) {
+  .lateral { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+  .bloco--destaques, .bloco--todas { grid-column: 1 / -1; min-width: 0; }
+  .destaques { grid-auto-flow: column; grid-auto-columns: minmax(230px, 270px); overflow-x: auto; padding: 2px 2px 8px; scroll-snap-type: x proximity; overscroll-behavior-x: contain; }
+  .destaques > li { scroll-snap-align: start; display: grid; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; transition-delay: 0ms !important; scroll-behavior: auto !important; }
+  .pulso { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="pagina">
+  <header class="topo">
+    <div class="topo__barra">
+      <a class="marca" href="https://github.com/JvFaraco/os-validator-demo"><span class="marca__ponto" aria-hidden="true"></span>JvFaraco/os-validator-demo</a>
+      <nav class="topo__links" aria-label="Links">
+        <a class="botao" href="https://github.com/JvFaraco/os-validator-demo#readme">README</a>
+        <a class="botao" href="https://github.com/JvFaraco/os-validator-demo">
+          <svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 4.5 2 8l3.5 3.5M10.5 4.5 14 8l-3.5 3.5"/></svg>
+          Código
+        </a>
+        <button class="botao" id="tema" type="button" aria-label="Tema: alternar entre claro e escuro">
+          <svg class="icone-lua" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 9.5A5.5 5.5 0 0 1 6.5 2.5a5.5 5.5 0 1 0 7 7Z"/></svg>
+          <svg class="icone-sol" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3 3l1 1M12 12l1 1M3 13l1-1M12 4l1-1"/></svg>
+          <span>Tema</span>
+        </button>
+      </nav>
+    </div>
+    <h1>Siga uma O.S. pelo validador</h1>
+    <p class="lead">Escolha uma das 38 O.S. fictícias e veja por onde ela passa. <strong>As regras em Python vêm primeiro, a IA só lê a nota do técnico e quem decide o caminho é o código.</strong> As respostas da IA são as da rodada real de 9/11/2026, reexibidas aqui sem chamar a API.</p>
+  </header>
+
+  <noscript><p class="neutro">Esta página precisa de JavaScript. O <a href="https://github.com/JvFaraco/os-validator-demo#readme">README</a> descreve o mesmo fluxo em texto.</p></noscript>
+
+  <div class="grade" id="app" hidden>
+    <aside class="lateral" aria-label="Escolha da O.S. e do provedor">
+      <section class="bloco cartao" style="padding: var(--s3)">
+        <fieldset class="segmentos" id="provedores">
+          <legend class="sr-only">Provedor da IA</legend>
+        </fieldset>
+        <p class="nota-provedor" id="nota-provedor"></p>
+      </section>
+
+      <section class="bloco" aria-labelledby="t-metricas">
+        <h2 id="t-metricas">Rodada completa</h2>
+        <dl class="metricas" id="metricas"></dl>
+        <p class="erros-provedor" id="erros-provedor"></p>
+      </section>
+
+      <section class="bloco bloco--destaques" aria-labelledby="t-destaques">
+        <h2 id="t-destaques">Comece por um destes</h2>
+        <ul class="destaques" id="destaques"></ul>
+      </section>
+
+      <details class="bloco bloco--todas" id="bloco-todas" open>
+        <summary><h2 id="t-todas">Todas as 38, pelo gabarito</h2></summary>
+        <fieldset class="todas" id="todas">
+          <legend class="sr-only">O.S. fictícias</legend>
+        </fieldset>
+        <p class="legenda-chips">A cor é o caminho que o sistema escolheu com este provedor. ✗ marca onde ele não bateu com o gabarito escrito à mão.</p>
+      </details>
+    </aside>
+
+    <main class="palco" id="palco" aria-labelledby="t-caso">
+      <div class="caso">
+        <div>
+          <h2 id="t-caso"></h2>
+          <p class="caso__gabarito" id="caso-gabarito"></p>
+        </div>
+        <div class="caso__nav">
+          <button class="botao" type="button" id="os-anterior" aria-label="O.S. anterior">←</button>
+          <button class="botao" type="button" id="os-proxima" aria-label="Próxima O.S.">→</button>
+        </div>
+      </div>
+      <div class="palco__corpo">
+        <div>
+          <p class="legenda-fluxo">Escolha uma etapa para ver o que ela fez com esta O.S. A pílula <span class="saida">→ REVISÃO <b>n</b></span> diz para onde a O.S. sai naquela etapa e quantas das 38 saíram ali.</p>
+          <div class="fluxo" id="fluxo">
+            <svg class="fluxo__linhas" id="linhas" aria-hidden="true">
+              <defs>
+                <marker id="ponta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path class="seta" d="M0 0 10 5 0 10z"/>
+                </marker>
+              </defs>
+              <path class="linha-base" id="linha-base"/>
+              <path class="linha-progresso" id="linha-progresso"/>
+              <path class="linha-desvio" id="linha-desvio" marker-end="url(#ponta)"/>
+              <path id="trajeto" fill="none" stroke="none"/>
+              <circle class="pulso" id="pulso" r="5"/>
+            </svg>
+            <ol class="etapas" id="etapas" aria-label="Etapas do fluxo"></ol>
+          </div>
+          <div class="pessoa">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c.9-3.8 4-6 7.5-6s6.6 2.2 7.5 6"/></svg>
+            <span><strong>Uma pessoa aprova ou devolve.</strong> <span id="aprovacao-final"></span></span>
+          </div>
+        </div>
+        <div class="palco__detalhe" id="lugar-detalhe">
+          <section class="detalhe cartao" id="detalhe" aria-labelledby="t-detalhe" tabindex="-1">
+            <div class="detalhe__topo"><span id="detalhe-posicao"></span><span id="detalhe-selo"></span></div>
+            <h3 id="t-detalhe"></h3>
+            <p class="detalhe__faz" id="detalhe-faz"></p>
+            <div class="detalhe__conteudo" id="detalhe-conteudo"></div>
+            <div class="detalhe__nav">
+              <button class="botao" type="button" id="etapa-anterior">← Etapa anterior</button>
+              <button class="botao" type="button" id="etapa-proxima">Próxima etapa →</button>
+            </div>
+          </section>
+        </div>
+      </div>
+      <p class="sr-only" aria-live="polite" id="anuncio"></p>
+    </main>
+  </div>
+
+  <div class="estado-carga" id="carga">Carregando as O.S.…</div>
+
+  <footer class="rodape">
+    <p><strong>Dados 100% fictícios</strong>, escritos para este repositório. A demo é inspirada num sistema real que mantenho em produção; o código, as regras, o catálogo e as O.S. foram escritos do zero.</p>
+    <p>Esta página não roda IA nenhuma. Cada O.S. passou pelo <code>decidir</code> de verdade, com as respostas gravadas em <a href="https://github.com/JvFaraco/os-validator-demo/tree/main/resultados"><code>resultados/</code></a>, e o resultado foi salvo em <a href="https://github.com/JvFaraco/os-validator-demo/blob/main/docs/dados.json"><code>docs/dados.json</code></a> por <code>python tools/gerar_demo.py</code>. Um teste falha se esse arquivo ficar desatualizado. Licença MIT.</p>
+  </footer>
+</div>
+
+<script>
+"use strict";
+
+const ORDEM = ["entrada", "contrato", "regras", "catalogo", "guarda", "sanitizacao", "ia", "validacao", "decisao"];
+
+const ETAPAS = {
+  entrada: {
+    nome: "O.S. em JSON",
+    faz: "A O.S. como chega do sistema de campo, com nome, telefone e endereço do cliente. Só os campos destacados podem sair da máquina, e a nota ainda passa pela máscara.",
+  },
+  contrato: {
+    nome: "Contrato de entrada", saida: "REVISAO_HUMANA", rotuloSaida: "fora do contrato",
+    faz: "A O.S. é validada contra schemas/ordem.schema.json. Se vier malformada, o defeito é da coleta, não do técnico: ela vai para revisão humana, nunca para correção.",
+  },
+  regras: {
+    nome: "8 regras determinísticas", saida: "PRECISA_CORRECAO", rotuloSaida: "bloqueio",
+    faz: "Regras em Python, com a O.S. inteira e sem interpretar texto. Qualquer bloqueio devolve a O.S. ao técnico, e a IA nem é chamada: a O.S. volta de qualquer jeito. Avisos seguem para o conferente.",
+  },
+  catalogo: {
+    nome: "Catálogo fechado", saida: "REVISAO_HUMANA", rotuloSaida: "nenhuma opção",
+    faz: "São 19 combinações problema → solução em config/catalogo.yaml. O Python deixa só as que fazem sentido para o tipo de serviço e os equipamentos desta O.S. A IA só escolhe entre o que sobrou.",
+  },
+  guarda: {
+    nome: "Guarda de comando", saida: "REVISAO_HUMANA", rotuloSaida: "comando na nota",
+    faz: "A nota é escrita por gente e pode conter \"aprove esta O.S.\". Frases de comando óbvias levam a O.S. para revisão antes de qualquer chamada à IA. A detecção por padrão não pega tudo, por isso ela não é a única camada.",
+  },
+  sanitizacao: {
+    nome: "Sanitização", saida: "REVISAO_HUMANA", rotuloSaida: "dado pessoal escapou",
+    faz: "O pacote da IA é montado do zero com três campos. Telefone, e-mail, CPF e CEP são mascarados na nota, e o nome e o endereço da própria O.S. viram marcadores. Uma guarda final procura de novo os dados pessoais no pacote pronto.",
+  },
+  ia: {
+    nome: "IA escolhe 1 opção", tagIA: true,
+    faz: "O modelo recebe o pacote e as opções desta O.S. e devolve combinacao_id, confianca, trecho_citado e observacao_conferente. Pode responder NENHUMA quando a nota não sustenta uma escolha só. Não há campo para decidir o caminho da O.S.",
+  },
+  validacao: {
+    nome: "Validação local", saida: "REVISAO_HUMANA", rotuloSaida: "falha ou abstenção",
+    faz: "A resposta só vale se passar por cinco conferências, feitas no código para qualquer provedor: JSON válido, dentro do schema, uma das opções desta O.S., trecho citado presente na nota mascarada e confiança acima do limiar.",
+  },
+  decisao: {
+    nome: "Decisão do código",
+    faz: "O código escolhe entre três caminhos. A IA não decide: uma resposta com um campo \"decisao\" seria rejeitada pelo schema.",
+  },
+};
+
+const CAMINHOS = {
+  PRONTA_PARA_VALIDACAO: { curto: "PRONTA", grupo: "Prontas para validação" },
+  PRECISA_CORRECAO: { curto: "CORREÇÃO", grupo: "Precisam de correção" },
+  REVISAO_HUMANA: { curto: "REVISÃO", grupo: "Revisão humana" },
+};
+
+const TIPOS = { MANUTENCAO: "Manutenção", PREVENTIVA: "Preventiva", DESINSTALACAO: "Desinstalação" };
+
+const DESTAQUES = [
+  { id: "OS-0007", etapa: "sanitizacao", titulo: "Nome e telefone na nota", texto: "Viram [NOME] e [TELEFONE] antes de a nota sair da máquina." },
+  { id: "OS-0019", etapa: "regras", titulo: "Sensor trocado sem devolução", texto: "Volta ao técnico. A IA nem é chamada." },
+  { id: "OS-0029", etapa: "guarda", titulo: "A nota tenta dar ordem ao sistema", texto: "Vai para revisão humana sem passar pela IA." },
+  { id: "OS-0036", etapa: "ia", titulo: "“Achou que o sensor não detectava”", texto: "O provedor falso aprova errado; o modelo se abstém. Troque o provedor para comparar." },
+  { id: "OS-0031", etapa: "validacao", titulo: "Dois atendimentos numa O.S.", texto: "O modelo responde NENHUMA, e a O.S. vai para revisão." },
+  { id: "OS-0033", etapa: "catalogo", titulo: "Controle remoto, fora do catálogo", texto: "Sem opção para escolher, nem chega à IA." },
+  { id: "OS-0012", etapa: "regras", titulo: "Só 1 foto anexada", texto: "Aviso não bloqueia: segue ao conferente, com o e-mail mascarado." },
+];
+
+const NOTAS_PROVEDOR = {
+  haiku: "Respostas gravadas da rodada de {rodada} com claude-haiku-5-5, o padrão do projeto.",
+  sonnet: "Respostas gravadas da rodada de {rodada} com claude-sonnet-5-5, para comparação de custo.",
+  falso: "Provedor offline por palavras-chave. É a linha de base do CI e mostra o tipo de erro que só palavra-chave comete.",
+};
+
+const CONFERENCIAS = ["JSON válido", "dentro do schema", "combinação entre as opções desta O.S.", "trecho citado está na nota", "confiança acima do limiar"];
+const CAMPOS_IA = new Set(["tipo_servico", "equipamentos[].categoria", "equipamentos[].acao", "nota_tecnico"]);
+const CAMPOS_PESSOAIS = new Set(["cliente.nome", "cliente.telefone", "cliente.endereco", "tecnico.nome", "tecnico.matricula"]);
+const MARCADOR = /\[(?:NOME|TELEFONE|EMAIL|CPF|CEP|ENDERECO)\]/g;
+const COMANDOS = ["ignore as regras", "desconsidere as instruções", "classifique como", "responda que", "aprove"];
+
+const reduzir = matchMedia("(prefers-reduced-motion: reduce)");
+const largo = matchMedia("(min-width: 800px)");
+
+let D = null;
+const estado = { os: "OS-0007", provedor: "haiku", etapa: "sanitizacao" };
+let ultimoPonteiro = 0;
+
+const $ = (id) => document.getElementById(id);
+const esc = (t) => String(t ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
+const quebravel = (codigo) => esc(codigo).replace(/_/g, "_<wbr>");
+const plural = (n, um, varios) => `${n} ${n === 1 ? um : varios}`;
+const dataBR = (iso) => iso.split("-").reverse().join("/");
+
+function ordemAtual() { return D.ordens.find((o) => o.id === estado.os); }
+function trilha(o) { return o.por_provedor[estado.provedor]; }
+function provedorAtual() { return D.provedores.find((p) => p.id === estado.provedor); }
+
+function situacao(o, etapa) {
+  const t = trilha(o);
+  const i = ORDEM.indexOf(etapa);
+  const ip = ORDEM.indexOf(t.parada);
+  if (etapa === "decisao") return "final";
+  if (i < ip) return "feito";
+  if (i === ip) return "parada";
+  return "pulado";
+}
+
+function contaParadas(etapa) {
+  return D.ordens.filter((o) => o.por_provedor[estado.provedor].parada === etapa).length;
+}
+
+/* ---------- textos curtos de cada nó ---------- */
+function estadoCurto(o, etapa) {
+  const t = trilha(o);
+  const s = situacao(o, etapa);
+  const ordem = o.ordem;
+  if (s === "pulado") return etapa === "ia" ? "não chamada" : "não executada";
+  switch (etapa) {
+    case "entrada":
+      return `${TIPOS[ordem.tipo_servico] || ordem.tipo_servico} · ${plural(ordem.equipamentos.length, "equipamento", "equipamentos")} · ${plural(ordem.fotos ?? 0, "foto", "fotos")}`;
+    case "contrato":
+      return s === "parada" ? "✗ fora do contrato" : "✓ dentro do schema";
+    case "regras": {
+      const b = o.achados.filter((a) => a.severidade === "BLOQUEIO");
+      const av = o.achados.filter((a) => a.severidade === "AVISO");
+      if (b.length) return `✗ ${plural(b.length, "bloqueio", "bloqueios")}: ${b.map((a) => a.codigo).join(", ")}`;
+      if (av.length) return `! ${plural(av.length, "aviso", "avisos")}: ${av.map((a) => a.codigo).join(", ")}`;
+      return "✓ nenhuma pendência";
+    }
+    case "catalogo":
+      return s === "parada" ? `✗ nenhuma das ${D.catalogo.total}` : `${o.opcoes.length} de ${D.catalogo.total} opções`;
+    case "guarda":
+      return s === "parada" ? `✗ "${o.guarda}"` : "✓ nenhum comando";
+    case "sanitizacao": {
+      if (s === "parada") return "✗ dado pessoal no pacote";
+      const m = Object.values(o.pacote.mascaras).reduce((a, b) => a + b, 0);
+      return `${o.pacote.removidos.length} campos fora · ${m ? plural(m, "marcador", "marcadores") : "sem marcador"}`;
+    }
+    case "ia": {
+      const r = t.ia && t.ia.resposta;
+      if (!r) return t.ia ? `✗ ${t.ia.status.toLowerCase()}` : "não chamada";
+      return r.combinacao_id === "NENHUMA" ? `NENHUMA · confiança ${r.confianca}` : `${r.combinacao_id} · confiança ${r.confianca}`;
+    }
+    case "validacao": {
+      const ok = t.ia.verificacoes.filter(([, v]) => v).length;
+      if (s === "parada") return t.ia.status === "ABSTENCAO" ? "✗ abstenção" : `✗ ${t.ia.verificacoes.find(([, v]) => !v)?.[0] || t.ia.status.toLowerCase()}`;
+      return `✓ ${ok} de ${CONFERENCIAS.length} conferências`;
+    }
+    case "decisao":
+      return t.caminho + (t.combinacao ? ` · ${t.combinacao.id}` : "");
+  }
+  return "";
+}
+
+/* ---------- montagem inicial ---------- */
+function montarProvedores() {
+  $("provedores").insertAdjacentHTML("beforeend", D.provedores.map((p) => `
+    <label><input type="radio" name="provedor" value="${p.id}"${p.id === estado.provedor ? " checked" : ""}><span>${esc(p.rotulo.replace("Claude ", "").replace(" (palavras-chave)", ""))}</span></label>`).join(""));
+  $("provedores").addEventListener("change", (e) => {
+    if (e.target.name !== "provedor") return;
+    estado.provedor = e.target.value;
+    atualizar({ animar: true });
+  });
+}
+
+function montarDestaques() {
+  $("destaques").innerHTML = DESTAQUES.map((d) => `
+    <li><button type="button" class="destaque" data-os="${d.id}" data-etapa="${d.etapa}">
+      <span class="destaque__id">${d.id.replace("OS-", "")}</span>
+      <span class="destaque__titulo">${esc(d.titulo)}</span>
+      <span class="destaque__texto">${esc(d.texto)}</span>
+    </button></li>`).join("");
+  $("destaques").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-os]");
+    if (!b) return;
+    escolherOS(b.dataset.os, b.dataset.etapa, { rolar: true });
+  });
+}
+
+function montarTodas() {
+  const grupos = Object.keys(CAMINHOS).map((c) => {
+    const lista = D.ordens.filter((o) => o.gabarito.decisao === c);
+    return `<div class="grupo" data-caminho="${c}">
+      <h3>${CAMINHOS[c].grupo} <span class="conta">${lista.length}</span></h3>
+      <div class="chips">${lista.map((o) => `
+        <label class="chip" data-os="${o.id}"><input type="radio" name="os" value="${o.id}"><span class="chip__rotulo"><span class="sr-only">OS-</span>${o.id.replace("OS-", "")}</span></label>`).join("")}
+      </div></div>`;
+  });
+  $("todas").insertAdjacentHTML("beforeend", grupos.join(""));
+  const todas = $("todas");
+  todas.addEventListener("pointerdown", () => { ultimoPonteiro = performance.now(); });
+  todas.addEventListener("change", (e) => {
+    if (e.target.name !== "os") return;
+    escolherOS(e.target.value, null, { rolar: performance.now() - ultimoPonteiro < 800 });
+  });
+}
+
+function montarEtapas() {
+  $("etapas").innerHTML = ORDEM.map((id, i) => {
+    const e = ETAPAS[id];
+    return `<li class="etapa" data-etapa="${id}" style="--i:${i}">
+      <button type="button" class="no" aria-controls="detalhe">
+        <span class="no__num" aria-hidden="true">${i + 1}</span>
+        <span class="no__corpo">
+          <span class="no__topo">
+            <span class="no__nome">${esc(e.nome)}${e.tagIA ? ' <span class="tag-ia">IA</span>' : ""}</span>
+            ${e.saida ? `<span class="saida" data-caminho="${e.saida}"></span>` : ""}
+          </span>
+          <span class="no__estado"></span>
+        </span>
+      </button>
+    </li>`;
+  }).join("");
+  $("etapas").addEventListener("click", (e) => {
+    const li = e.target.closest("li.etapa");
+    if (!li || !e.target.closest(".no")) return;
+    estado.etapa = li.dataset.etapa;
+    atualizar({ animar: false, focoDetalhe: !largo.matches });
+  });
+  $("etapas").addEventListener("keydown", (e) => {
+    if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key) || !e.target.closest(".no")) return;
+    const botoes = [...document.querySelectorAll(".no")];
+    const i = botoes.indexOf(e.target.closest(".no"));
+    const j = e.key === "Home" ? 0 : e.key === "End" ? botoes.length - 1 : i + (e.key === "ArrowDown" ? 1 : -1);
+    if (j < 0 || j >= botoes.length) return;
+    e.preventDefault();
+    botoes[j].focus();
+  });
+}
+
+/* ---------- atualização ---------- */
+function escolherOS(id, etapa, { rolar = false } = {}) {
+  const o = D.ordens.find((x) => x.id === id);
+  if (!o) return;
+  estado.os = id;
+  estado.etapa = etapa || o.por_provedor[estado.provedor].parada;
+  atualizar({ animar: true });
+  if (rolar) {
+    const r = $("palco").getBoundingClientRect();
+    if (r.top < 0 || r.top > innerHeight * 0.5) $("palco").scrollIntoView({ behavior: reduzir.matches ? "auto" : "smooth", block: "start" });
+  }
+}
+
+function atualizar({ animar = false, focoDetalhe = false } = {}) {
+  const o = ordemAtual();
+  const t = trilha(o);
+  const p = provedorAtual();
+  const info = CAMINHOS[t.caminho];
+
+  // provedor e métricas
+  const m = p.metricas;
+  const custo = p.uso.custo_estimado_usd;
+  $("metricas").innerHTML = `
+    <div><dt>Decisão certa</dt><dd>${m.decisao.acertos}/${m.decisao.total}</dd></div>
+    <div><dt>Classificação certa</dt><dd>${m.classificacao.acertos}/${m.classificacao.total}</dd></div>
+    <div><dt>Chamadas à IA</dt><dd>${p.uso.chamadas_ia} <small>de ${D.ordens.length}</small></dd></div>
+    <div><dt>Custo da rodada</dt><dd>${custo == null ? "US$ 0" : "~US$ " + custo.toFixed(3).replace(".", ",")}</dd></div>`;
+  $("nota-provedor").textContent = NOTAS_PROVEDOR[p.id].replace("{rodada}", dataBR(p.rodada));
+  $("erros-provedor").innerHTML = p.erros.length
+    ? `Errou ${plural(p.erros.length, "O.S.", "O.S.")}: ${p.erros.map((id) => `<button type="button" class="link-os" data-os="${id}">${id}</button>`).join(", ")}`
+    : "Nenhum erro contra o gabarito nesta rodada.";
+
+  // chips e destaques
+  document.querySelectorAll(".chip").forEach((c) => {
+    const ox = D.ordens.find((x) => x.id === c.dataset.os);
+    const tx = ox.por_provedor[estado.provedor];
+    c.dataset.caminho = tx.caminho;
+    const diverge = tx.caminho !== ox.gabarito.decisao || (ox.gabarito.combinacao && ox.gabarito.combinacao !== tx.combinacao?.id);
+    c.classList.toggle("diverge", !!diverge);
+    c.title = `${ox.id}: ${CAMINHOS[tx.caminho].curto}${tx.combinacao ? " " + tx.combinacao.id : ""}${diverge ? " (não bateu com o gabarito)" : ""}`;
+    const input = c.querySelector("input");
+    input.checked = ox.id === estado.os;
+  });
+  document.querySelectorAll(".destaque").forEach((b) => {
+    const ox = D.ordens.find((x) => x.id === b.dataset.os);
+    b.dataset.caminho = ox.por_provedor[estado.provedor].caminho;
+    b.setAttribute("aria-current", String(b.dataset.os === estado.os));
+  });
+
+  // cabeçalho do caso
+  const tipo = TIPOS[o.ordem.tipo_servico] || o.ordem.tipo_servico;
+  $("t-caso").innerHTML = `<span class="mono">${o.id}</span> <span>${esc(tipo)}</span> <span class="selo" data-caminho="${t.caminho}">${info.curto}${t.combinacao ? " · " + t.combinacao.id : ""}</span>`;
+  const g = o.gabarito;
+  const bateu = t.caminho === g.decisao && (!g.combinacao || g.combinacao === t.combinacao?.id);
+  $("caso-gabarito").innerHTML = esc(`Gabarito: ${CAMINHOS[g.decisao].curto}${g.combinacao ? " · " + g.combinacao : ""}${g.comentario ? ". " + g.comentario.charAt(0).toUpperCase() + g.comentario.slice(1) + "." : "."}`)
+    + (bateu ? "" : ` <span class="nao-bateu">✗ Com este provedor, não bateu.</span>`);
+  const idx = D.ordens.indexOf(o);
+  $("os-anterior").disabled = idx === 0;
+  $("os-proxima").disabled = idx === D.ordens.length - 1;
+
+  // nós
+  const fluxo = $("fluxo");
+  if (animar && !reduzir.matches) {
+    fluxo.classList.remove("is-percorrendo");
+    void fluxo.offsetWidth;
+    fluxo.classList.add("is-percorrendo");
+    clearTimeout(atualizar.t);
+    atualizar.t = setTimeout(() => fluxo.classList.remove("is-percorrendo"), 1100);
+  }
+  document.querySelectorAll(".etapa").forEach((li) => {
+    const id = li.dataset.etapa;
+    const s = situacao(o, id);
+    li.classList.remove("is-feito", "is-parada", "is-pulado", "is-final", "is-atual");
+    li.classList.add(`is-${s}`);
+    li.classList.toggle("is-atual", id === estado.etapa);
+    if (s === "parada" || s === "final") li.dataset.caminho = t.caminho; else delete li.dataset.caminho;
+    li.querySelector(".no__estado").textContent = estadoCurto(o, id);
+    const botao = li.querySelector(".no");
+    botao.setAttribute("aria-current", id === estado.etapa ? "step" : "false");
+    const saida = li.querySelector(".saida");
+    if (saida) {
+      const n = contaParadas(id);
+      const e = ETAPAS[id];
+      saida.innerHTML = `→ ${CAMINHOS[e.saida].curto} <b>${n}</b>`;
+      saida.title = `${e.rotuloSaida}: sai para ${e.saida}. ${n} de ${D.ordens.length} O.S. saíram aqui nesta rodada.`;
+      saida.setAttribute("aria-label", `saída se houver ${e.rotuloSaida}: ${CAMINHOS[e.saida].curto}, ${n} de ${D.ordens.length} O.S.`);
+    }
+  });
+
+  renderDetalhe(o, t);
+  posicionarDetalhe();
+  requestAnimationFrame(() => desenharLinhas(animar));
+  if (focoDetalhe) $("detalhe").focus({ preventScroll: false });
+
+  $("anuncio").textContent = `${o.id}: ${t.caminho}. Saiu do fluxo em ${ETAPAS[t.parada].nome}.`;
+  const hash = `#${o.id}/${estado.provedor}/${estado.etapa}`;
+  if (location.hash !== hash) history.replaceState(null, "", hash);
+}
+
+function posicionarDetalhe() {
+  const detalhe = $("detalhe");
+  const alvo = largo.matches ? $("lugar-detalhe") : document.querySelector(`.etapa[data-etapa="${estado.etapa}"]`);
+  if (detalhe.parentElement !== alvo) alvo.appendChild(detalhe);
+}
+
+/* ---------- linhas do fluxograma ---------- */
+function desenharLinhas(animar) {
+  const fluxo = $("fluxo");
+  const caixa = fluxo.getBoundingClientRect();
+  const o = ordemAtual();
+  const t = trilha(o);
+  const centro = (el) => { const r = el.getBoundingClientRect(); return { x: r.left - caixa.left + r.width / 2, y: r.top - caixa.top + r.height / 2 }; };
+  const num = (id) => document.querySelector(`.etapa[data-etapa="${id}"] .no__num`);
+  const no = (id) => document.querySelector(`.etapa[data-etapa="${id}"] .no`);
+  const topo = centro(num(ORDEM[0]));
+  const fim = centro(num("decisao"));
+  const parada = centro(num(t.parada));
+  const svg = $("linhas");
+  svg.setAttribute("viewBox", `0 0 ${caixa.width} ${caixa.height}`);
+
+  $("linha-base").setAttribute("d", `M${topo.x} ${topo.y}V${fim.y}`);
+  const progresso = $("linha-progresso");
+  progresso.setAttribute("d", `M${topo.x} ${topo.y}V${parada.y}`);
+
+  const desvio = $("linha-desvio");
+  svg.dataset.caminho = t.caminho;
+  desenharLinhas.tamanho = `${Math.round(caixa.width)}x${Math.round(caixa.height)}`;
+  let dDesvio = "", inicioDesvio = "", restoDesvio = "";
+  if (t.parada !== "decisao") {
+    const rp = no(t.parada).getBoundingClientRect();
+    const rf = no("decisao").getBoundingClientRect();
+    const x0 = rp.right - caixa.left;
+    const y0 = rp.top - caixa.top + rp.height / 2;
+    const y1 = rf.top - caixa.top + rf.height / 2;
+    const x1 = rf.right - caixa.left + 2;
+    const xg = caixa.width - 10;
+    const r = Math.min(10, (y1 - y0) / 2);
+    inicioDesvio = `${x0} ${y0}`;
+    restoDesvio = `H${xg - r}Q${xg} ${y0} ${xg} ${y0 + r}V${y1 - r}Q${xg} ${y1} ${xg - r} ${y1}H${x1 + 6}`;
+    dDesvio = `M${inicioDesvio}${restoDesvio}`;
+  }
+  desvio.setAttribute("d", dDesvio);
+  desvio.style.display = dDesvio ? "" : "none";
+
+  const traco = (el, atraso, dur) => {
+    const L = el.getTotalLength ? el.getTotalLength() : 0;
+    el.style.transition = "none";
+    el.style.strokeDasharray = `${L} ${L}`;
+    if (!animar || reduzir.matches || !L) { el.style.strokeDashoffset = "0"; return; }
+    el.style.strokeDashoffset = String(L);
+    void el.getBoundingClientRect();
+    el.style.transition = `stroke-dashoffset ${dur}ms var(--ease-in-out) ${atraso}ms`;
+    el.style.strokeDashoffset = "0";
+  };
+  const durProgresso = 140 + ORDEM.indexOf(t.parada) * 55;
+  traco(progresso, 0, durProgresso);
+  if (dDesvio) traco(desvio, durProgresso, 420);
+
+  // pulso que percorre o caminho da O.S.
+  const trajeto = $("trajeto");
+  trajeto.setAttribute("d", `M${topo.x} ${topo.y}V${parada.y}` + (dDesvio ? `L${inicioDesvio}${restoDesvio}` : ""));
+  const pulso = $("pulso");
+  cancelAnimationFrame(desenharLinhas.raf);
+  if (!animar || reduzir.matches) { pulso.style.opacity = "0"; return; }
+  const total = trajeto.getTotalLength();
+  const dur = durProgresso + (dDesvio ? 420 : 0);
+  const inicio = performance.now();
+  const passo = (agora) => {
+    const k = Math.min(1, (agora - inicio) / dur);
+    const e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    const pt = trajeto.getPointAtLength(e * total);
+    pulso.setAttribute("cx", pt.x);
+    pulso.setAttribute("cy", pt.y);
+    pulso.style.opacity = k < 1 ? "1" : "0";
+    if (k < 1) desenharLinhas.raf = requestAnimationFrame(passo);
+  };
+  desenharLinhas.raf = requestAnimationFrame(passo);
+}
+
+/* ---------- realces de texto ---------- */
+function comMarcadores(texto) {
+  return esc(texto).replace(/\[(NOME|TELEFONE|EMAIL|CPF|CEP|ENDERECO)\]/g, '<mark class="mk">[$1]</mark>');
+}
+
+function semAcentoComMapa(texto) {
+  let s = ""; const mapa = [];
+  [...texto].forEach((c, i) => {
+    const d = c.normalize("NFD").replace(/\p{Mn}/gu, "").toLowerCase();
+    for (const ch of d) { s += ch; mapa.push(i); }
+  });
+  return { s, mapa, chars: [...texto] };
+}
+
+// Destaca um trecho dentro do texto, sem ligar para acento, caixa e pontuação nas pontas.
+function realcar(texto, trecho, classe, formatar = esc) {
+  if (!trecho) return formatar(texto);
+  const limpo = trecho.trim().replace(/^["'“”‘’.,;:\s]+|["'“”‘’.,;:\s]+$/g, "");
+  const { s, mapa, chars } = semAcentoComMapa(texto);
+  const alvo = semAcentoComMapa(limpo).s.replace(/\s+/g, " ");
+  const k = s.replace(/\s/g, " ").indexOf(alvo);
+  if (k < 0 || !alvo) return formatar(texto);
+  const ini = mapa[k];
+  const fim = mapa[k + alvo.length - 1] + 1;
+  return formatar(chars.slice(0, ini).join("")) + `<mark class="${classe}">${formatar(chars.slice(ini, fim).join(""))}</mark>` + formatar(chars.slice(fim).join(""));
+}
+
+// Nota original com o que foi mascarado em destaque: alinha as partes iguais das duas versões.
+function originalComMascarado(original, mascarada) {
+  const partes = mascarada.split(MARCADOR);
+  if (partes.length === 1) return esc(original);
+  let pos = 0, html = "";
+  for (let i = 0; i < partes.length; i++) {
+    const parte = partes[i];
+    const achou = original.indexOf(parte, pos);
+    if (achou < 0) return esc(original);
+    if (i > 0) {
+      const removido = original.slice(pos, achou);
+      html += removido ? `<mark class="pii">${esc(removido)}</mark>` : "";
+    }
+    html += esc(parte);
+    pos = achou + parte.length;
+    if (i === partes.length - 1 && pos < original.length) html += `<mark class="pii">${esc(original.slice(pos))}</mark>`;
+  }
+  return html;
+}
+
+function jsonColorido(valor, { marcar = true } = {}) {
+  const linhas = [];
+  const fmt = (v, caminho) => {
+    if (v === null) return '<span class="b">null</span>';
+    if (typeof v === "boolean") return `<span class="b">${v}</span>`;
+    if (typeof v === "number") return `<span class="n">${v}</span>`;
+    const cls = CAMPOS_PESSOAIS.has(caminho) ? "s pii" : "s";
+    return `<span class="${cls}">${esc(JSON.stringify(v))}</span>`;
+  };
+  const andar = (v, caminho, recuo, chave, ultimo) => {
+    const pre = "  ".repeat(recuo) + (chave != null ? `<span class="k">"${esc(chave)}"</span>: ` : "");
+    const virg = ultimo ? "" : ",";
+    const vai = marcar && CAMPOS_IA.has(caminho);
+    const linha = (html, marcar) => linhas.push(`<span class="linha${marcar ? " vai" : ""}">${html}</span>`);
+    if (Array.isArray(v)) {
+      if (!v.length) return linha(`${pre}[]${virg}`, vai);
+      linha(`${pre}[`);
+      v.forEach((x, i) => andar(x, caminho + "[]", recuo + 1, null, i === v.length - 1));
+      return linha("  ".repeat(recuo) + `]${virg}`);
+    }
+    if (v && typeof v === "object") {
+      const ks = Object.keys(v);
+      if (!ks.length) return linha(`${pre}{}${virg}`);
+      linha(`${pre}{`);
+      ks.forEach((k, i) => andar(v[k], caminho ? `${caminho}.${k}` : k, recuo + 1, k, i === ks.length - 1));
+      return linha("  ".repeat(recuo) + `}${virg}`);
+    }
+    linha(pre + fmt(v, caminho) + virg, vai);
+  };
+  andar(valor, "", 0, null, true);
+  return `<pre class="codigo"><code>${linhas.join("")}</code></pre>`;
+}
+
+/* ---------- painel de detalhe ---------- */
+function motivoDePulo(t) {
+  return {
+    contrato: "a O.S. ficou fora do contrato de entrada",
+    regras: "havia pendência verificável nas regras, e a O.S. volta ao técnico de qualquer jeito",
+    catalogo: "não havia combinação do catálogo para escolher",
+    guarda: "a nota tinha texto dirigido ao sistema",
+    sanitizacao: "a guarda final achou dado pessoal no pacote",
+  }[t.parada] || "a O.S. saiu antes desta etapa";
+}
+
+function pulado(t, etapa) {
+  return `<p class="neutro">${etapa === "ia" ? "Não chamada" : "Não executada"}: ${esc(motivoDePulo(t))}.</p>`;
+}
+
+function blocoSaida(t, texto) {
+  return `<div class="aviso-caixa" data-caminho="${t.caminho}"><strong>Saiu aqui → ${t.caminho}.</strong> ${esc(texto)}</div>`;
+}
+
+const DETALHES = {
+  entrada(o) {
+    return `
+      <div class="legenda"><span><i class="l-vai"></i>pode sair da máquina</span><span><i class="l-pii"></i>dado pessoal, fica na máquina</span></div>
+      ${jsonColorido(o.ordem)}`;
+  },
+  contrato(o, t, s) {
+    if (s === "parada") return blocoSaida(t, t.motivo);
+    const n = contaParadas("contrato");
+    return `<p>✓ A O.S. está dentro do contrato.</p>
+      <p class="neutro">${n ? plural(n, "O.S. parou", "O.S. pararam") + " aqui nesta rodada." : "Nenhuma das 38 O.S. fictícias para aqui. O caminho existe e é coberto por teste em tests/test_decisao.py."}</p>`;
+  },
+  regras(o, t, s) {
+    const porCodigo = Object.groupBy ? Object.groupBy(o.achados, (a) => a.codigo) : o.achados.reduce((m, a) => ((m[a.codigo] ||= []).push(a), m), {});
+    const itens = D.regras.map((r) => {
+      const achados = porCodigo[r.codigo] || [];
+      if (!achados.length) return `<li class="regra"><span class="regra__icone" aria-label="passou">✓</span><code>${quebravel(r.codigo)}</code><span class="regra__sev">${r.severidade}</span><span class="regra__desc">${esc(r.descricao)}</span></li>`;
+      const cls = r.severidade === "BLOQUEIO" ? "bloqueio" : "aviso";
+      return achados.map((a) => `<li class="regra ${cls}"><span class="regra__icone" aria-label="${cls}">${cls === "bloqueio" ? "✗" : "!"}</span><code>${quebravel(r.codigo)}</code><span class="regra__sev">${r.severidade}</span>
+        <span class="regra__msg">${esc(a.mensagem)}</span>
+        <span class="regra__ev">evidência: ${esc(JSON.stringify(a.evidencia))}</span></li>`).join("");
+    }).join("");
+    let extra = "";
+    if (s === "parada") extra = blocoSaida(t, "A IA não foi chamada.") + (t.nota_ao_tecnico ? `<div><h4>Nota que volta ao técnico</h4><p class="nota texto-pre">${esc(t.nota_ao_tecnico)}</p></div>` : "");
+    else if (o.achados.length) extra = `<p class="neutro">Aviso não bloqueia: a O.S. segue, e o aviso vai escrito para o conferente.</p>`;
+    const esperado = o.gabarito.regras.length ? o.gabarito.regras.join(", ") : "nenhuma";
+    return `<ul class="regras">${itens}</ul>${extra}<p class="neutro">Gabarito esperava: <code>${esc(esperado)}</code>.</p>`;
+  },
+  catalogo(o, t, s) {
+    if (s === "pulado") return pulado(t, "catalogo");
+    const cats = [...new Set(o.ordem.equipamentos.map((e) => D.catalogo.equipamentos[e.categoria] || e.categoria))].join(", ");
+    const filtro = o.ordem.tipo_servico === "MANUTENCAO"
+      ? `tipo ${o.ordem.tipo_servico} e equipamentos com ação: ${cats}`
+      : `tipo ${o.ordem.tipo_servico}`;
+    if (s === "parada") return `<p>Filtro: ${esc(filtro)}.</p>${blocoSaida(t, `Nenhuma das ${D.catalogo.total} combinações serve. Sem opção para escolher, a IA não é chamada.`)}`;
+    const escolhida = t.ia?.resposta?.combinacao_id;
+    const lista = o.opcoes.map((c) => `<li class="opcao${escolhida === c.id ? " escolhida" : ""}"><code>${c.id}</code><span>${esc(c.rotulo)}</span></li>`).join("");
+    return `<p>Filtro: ${esc(filtro)}. Sobraram <strong>${o.opcoes.length} de ${D.catalogo.total}</strong>, mais a abstenção:</p>
+      <ul class="opcoes">${lista}<li class="opcao nenhuma${escolhida === "NENHUMA" ? " escolhida" : ""}"><code>NENHUMA</code><span>a nota não sustenta uma escolha só</span></li></ul>`;
+  },
+  guarda(o, t, s) {
+    if (s === "pulado") return pulado(t, "guarda");
+    const nota = o.ordem.nota_tecnico || "";
+    if (s === "parada") return `<div><h4>Nota do técnico</h4><p class="nota">${realcar(nota, o.guarda, "comando")}</p></div>${blocoSaida(t, "A IA não foi chamada, qualquer que seja o provedor.")}`;
+    return `<p>✓ Nenhuma frase de comando na nota.</p>
+      <div><h4>Padrões procurados</h4><ul class="pilulas">${COMANDOS.map((c) => `<li>${esc(c)}</li>`).join("")}</ul></div>
+      <p class="neutro">Comandos que escapem do padrão ainda esbarram em duas camadas: o prompt manda o modelo se abster, e o modelo não tem como decidir o caminho.</p>`;
+  },
+  sanitizacao(o, t, s) {
+    if (s === "pulado") return pulado(t, "sanitizacao");
+    if (s === "parada") return blocoSaida(t, t.motivo);
+    const pac = o.pacote;
+    const original = o.ordem.nota_tecnico || "";
+    const mascaras = Object.entries(pac.mascaras);
+    return `
+      <div class="lado-a-lado">
+        <div><h4>Nota na O.S.</h4><p class="nota">${originalComMascarado(original, pac.dados.nota_tecnico)}</p></div>
+        <div><h4>Nota que sai da máquina</h4><p class="nota">${comMarcadores(pac.dados.nota_tecnico)}</p></div>
+      </div>
+      ${mascaras.length ? `<div><h4>Mascarado na nota</h4><ul class="pilulas">${mascaras.map(([k, n]) => `<li class="mk">${n}× [${esc(k)}]</li>`).join("")}</ul></div>` : `<p class="neutro">Nada para mascarar nesta nota.</p>`}
+      <div><h4>Pacote enviado à IA</h4>${jsonColorido(pac.dados, { marcar: false })}</div>
+      <div><h4>Fora do pacote (${pac.removidos.length})</h4><ul class="pilulas">${pac.removidos.map((r) => `<li>${esc(r)}</li>`).join("")}</ul></div>`;
+  },
+  ia(o, t, s) {
+    if (s === "pulado") return pulado(t, "ia");
+    const p = provedorAtual();
+    const r = t.ia.resposta;
+    const nomeModelo = p.modelo ? `<code>${esc(p.modelo)}</code>` : "O provedor falso";
+    if (!r) return `<p>${nomeModelo} não devolveu uma resposta aproveitável: ${esc(t.ia.motivo)}</p>`;
+    const comb = o.opcoes.find((c) => c.id === r.combinacao_id);
+    const campos = [
+      ["combinacao_id", `<code>${esc(r.combinacao_id)}</code>${comb ? " · " + esc(comb.rotulo) : r.combinacao_id === "NENHUMA" ? " · abstenção" : ""}`],
+      ["confianca", esc(r.confianca)],
+      ["trecho_citado", `“${esc(r.trecho_citado)}”`],
+      ["observacao_conferente", esc(r.observacao_conferente)],
+    ];
+    return `
+      <p>${nomeModelo} recebeu o pacote e ${plural(o.opcoes.length, "opção", "opções")} (${o.opcoes.map((c) => c.id).join(", ")} ou NENHUMA) e respondeu:</p>
+      <dl class="resposta">${campos.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
+      <div><h4>Onde está o trecho citado</h4><p class="nota">${realcar(o.pacote.dados.nota_tecnico, r.trecho_citado, "trecho", comMarcadores)}</p></div>
+      <p class="neutro">${p.id === "falso" ? "Resposta do provedor falso, por palavras-chave." : `Resposta gravada em resultados/ na rodada de ${dataBR(p.rodada)} e reexibida sem chamar a API.`}</p>`;
+  },
+  validacao(o, t, s) {
+    if (s === "pulado") return pulado(t, "validacao");
+    const feitas = t.ia.verificacoes;
+    const nomes = new Set(feitas.map(([n]) => n));
+    const itens = feitas.map(([n, ok]) => `<li class="${ok ? "ok" : "falha"}"><span class="marca-c" aria-label="${ok ? "passou" : "falhou"}">${ok ? "✓" : "✗"}</span>${esc(n === "IA escolheu uma combinação" ? "IA escolheu uma combinação (respondeu NENHUMA)" : n)}</li>`)
+      .concat(CONFERENCIAS.filter((n) => !nomes.has(n)).map((n) => `<li class="pendente"><span class="marca-c" aria-label="não conferida">–</span>${esc(n)} <small>(não chegou a ser conferida)</small></li>`));
+    const saida = s === "parada"
+      ? blocoSaida(t, t.ia.status === "ABSTENCAO" ? "Abster-se é uma resposta válida: é melhor do que forçar uma escolha." : t.ia.motivo)
+      : `<p class="neutro">Classificação aceita. O trecho foi conferido contra a nota mascarada, que é o que a IA viu.</p>`;
+    return `<ul class="conferencias">${itens.join("")}</ul>${saida}`;
+  },
+  decisao(o, t) {
+    const g = o.gabarito;
+    const bateu = t.caminho === g.decisao && (!g.combinacao || g.combinacao === t.combinacao?.id);
+    return `
+      <div class="decisao-grande" data-caminho="${t.caminho}">
+        <span class="caminho">${t.caminho}</span>
+        ${t.combinacao ? `<span class="comb"><code>${t.combinacao.id}</code> · ${esc(t.combinacao.rotulo)}</span>` : ""}
+        <span>${esc(t.motivo)}</span>
+      </div>
+      ${t.nota_ao_tecnico ? `<div><h4>Nota ao técnico</h4><p class="nota texto-pre">${esc(t.nota_ao_tecnico)}</p></div>` : ""}
+      ${t.avisos.length ? `<div><h4>Avisos ao conferente</h4><ul class="lista">${t.avisos.map((a) => `<li>${esc(a)}</li>`).join("")}</ul></div>` : ""}
+      <p class="bateu ${bateu ? "sim" : "nao"}"><span class="marca-c" aria-hidden="true">${bateu ? "✓" : "✗"}</span><span>Gabarito escrito à mão: <code>${g.decisao}${g.combinacao ? " · " + g.combinacao : ""}</code>${bateu ? ". Bateu." : ". Não bateu."}</span></p>`;
+  },
+};
+
+function renderDetalhe(o, t) {
+  const etapa = estado.etapa;
+  const i = ORDEM.indexOf(etapa);
+  const s = situacao(o, etapa);
+  $("detalhe-posicao").textContent = `Etapa ${i + 1} de ${ORDEM.length} · ${o.id}`;
+  const rotuloSituacao = { feito: "executada", parada: "a O.S. saiu aqui", pulado: etapa === "ia" ? "não chamada" : "não executada", final: t.caminho }[s];
+  $("detalhe-selo").innerHTML = `<span class="selo"${s === "parada" || s === "final" ? ` data-caminho="${t.caminho}"` : ""}>${esc(rotuloSituacao)}</span>`;
+  $("t-detalhe").textContent = ETAPAS[etapa].nome;
+  $("detalhe-faz").textContent = ETAPAS[etapa].faz;
+  const conteudo = $("detalhe-conteudo");
+  conteudo.innerHTML = DETALHES[etapa](o, t, s);
+  conteudo.classList.remove("entra");
+  if (!reduzir.matches) { void conteudo.offsetWidth; conteudo.classList.add("entra"); }
+  $("etapa-anterior").disabled = i === 0;
+  $("etapa-proxima").disabled = i === ORDEM.length - 1;
+}
+
+/* ---------- tema ---------- */
+function montarTema() {
+  $("tema").addEventListener("click", () => {
+    const escuroAgora = getComputedStyle(document.documentElement).colorScheme.includes("dark");
+    const novo = escuroAgora ? "light" : "dark";
+    const aplicar = () => { document.documentElement.dataset.theme = novo; };
+    if (document.startViewTransition && !reduzir.matches) document.startViewTransition(aplicar); else aplicar();
+    try { localStorage.setItem("tema", novo === "light" ? "claro" : "escuro"); } catch (e) {}
+  });
+}
+
+/* ---------- início ---------- */
+function lerHash() {
+  const [id, provedor, etapa] = decodeURIComponent(location.hash.slice(1)).split("/");
+  if (provedor && D.provedores.some((p) => p.id === provedor)) estado.provedor = provedor;
+  const o = D.ordens.find((x) => x.id === id);
+  if (o) {
+    estado.os = id;
+    estado.etapa = ORDEM.includes(etapa) ? etapa : o.por_provedor[estado.provedor].parada;
+  }
+  document.querySelectorAll('input[name="provedor"]').forEach((r) => { r.checked = r.value === estado.provedor; });
+}
+
+async function iniciar() {
+  try {
+    const resp = await fetch("dados.json", { cache: "no-cache" });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    D = await resp.json();
+  } catch (erro) {
+    $("carga").innerHTML = `Não consegui carregar <code>dados.json</code> (${esc(erro.message)}). Abra a página por um servidor, por exemplo <code>python -m http.server -d docs</code>, ou veja o <a href="https://github.com/JvFaraco/os-validator-demo#readme">README</a>.`;
+    return;
+  }
+  montarTema();
+  montarProvedores();
+  montarDestaques();
+  montarTodas();
+  montarEtapas();
+  lerHash();
+
+  $("os-anterior").addEventListener("click", () => { const i = D.ordens.findIndex((o) => o.id === estado.os); if (i > 0) escolherOS(D.ordens[i - 1].id); });
+  $("os-proxima").addEventListener("click", () => { const i = D.ordens.findIndex((o) => o.id === estado.os); if (i < D.ordens.length - 1) escolherOS(D.ordens[i + 1].id); });
+  $("etapa-anterior").addEventListener("click", () => { const i = ORDEM.indexOf(estado.etapa); if (i > 0) { estado.etapa = ORDEM[i - 1]; atualizar({}); } });
+  $("etapa-proxima").addEventListener("click", () => { const i = ORDEM.indexOf(estado.etapa); if (i < ORDEM.length - 1) { estado.etapa = ORDEM[i + 1]; atualizar({}); } });
+  $("erros-provedor").addEventListener("click", (e) => { const b = e.target.closest("[data-os]"); if (b) escolherOS(b.dataset.os, null, { rolar: true }); });
+  addEventListener("hashchange", () => { lerHash(); atualizar({ animar: true }); });
+  largo.addEventListener("change", () => { posicionarDetalhe(); requestAnimationFrame(() => desenharLinhas(false)); });
+  new ResizeObserver(() => {
+    const r = $("fluxo").getBoundingClientRect();
+    if (`${Math.round(r.width)}x${Math.round(r.height)}` !== desenharLinhas.tamanho) desenharLinhas(false);
+  }).observe($("fluxo"));
+
+  $("aprovacao-final").textContent = D.aprovacao_final.replace(/^A aprovação final é sempre de uma pessoa: /, "").replace(/^./, (c) => c.toUpperCase());
+  if (!matchMedia("(min-width: 1180px)").matches) $("bloco-todas").open = false;
+  $("carga").remove();
+  $("app").hidden = false;
+  atualizar({ animar: true });
+}
+
+iniciar();
+</script>
+</body>
+</html>
