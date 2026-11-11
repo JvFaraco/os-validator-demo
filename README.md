@@ -7,7 +7,7 @@ Regras em Python checam o que é verificável. A IA entra só para ler a nota do
 técnico, e mesmo assim escolhe dentro de um catálogo fechado. A decisão final
 é sempre de uma pessoa.
 
-[![Três O.S. fictícias passando pelo validador: uma fica pronta, uma volta ao técnico nas regras e uma vai para revisão na guarda de comando](docs/fluxo.svg)](https://jvfaraco.github.io/os-validator-demo/)
+[![Fluxo do validador: contrato, 8 regras, catálogo, guarda de comando, sanitização, IA e validação, com as saídas para PRECISA_CORRECAO, REVISAO_HUMANA e PRONTA_PARA_VALIDACAO, todas terminando numa pessoa. Três O.S. fictícias passam por ele: uma fica pronta, uma volta ao técnico nas regras e uma vai para revisão na guarda de comando](docs/fluxo.svg)](https://jvfaraco.github.io/os-validator-demo/)
 
 **[▶ Abrir a demo interativa](https://jvfaraco.github.io/os-validator-demo/)**: escolha uma das 38 O.S. e
 veja, etapa por etapa, o que as regras acharam, o que a sanitização tirou da nota, o que a IA
@@ -38,41 +38,9 @@ Mandar tudo para um LLM resolveria a segunda parte e criaria quatro problemas:
 
 ## A abordagem
 
-```mermaid
-flowchart LR
-    A["O.S. em JSON<br/>(com dados pessoais)"] --> B{"Contrato de<br/>entrada"}
-    B -- fora --> R["REVISAO_HUMANA"]
-    B --> C["8 regras<br/>determinísticas"]
-    C -- bloqueio --> X["PRECISA_CORRECAO<br/>nota ao técnico"]
-    C --> D["Catálogo filtra opções<br/>por tipo e equipamento"]
-    D -- nenhuma --> R
-    D -- "nota com comando<br/>(“aprove”, “ignore…”)" --> R
-    D --> E["Sanitização<br/>allowlist + máscara"]
-    E --> F["IA escolhe 1 opção<br/>saída em JSON Schema"]
-    F --> G{"Validação local<br/>schema · opções ·<br/>trecho · confiança"}
-    G -- falha ou abstenção --> R
-    G --> P["PRONTA_PARA_VALIDACAO<br/>avisos ao conferente"]
-    X --> H(("Pessoa"))
-    R --> H
-    P --> H
-
-    classDef ia fill:#0969da,stroke:#0969da,color:#ffffff
-    classDef pronta fill:#1a7f37,stroke:#1a7f37,color:#ffffff
-    classDef correcao fill:#cf222e,stroke:#cf222e,color:#ffffff
-    classDef revisao fill:#9a6700,stroke:#9a6700,color:#ffffff
-    classDef pessoa fill:#57606a,stroke:#57606a,color:#ffffff
-    class F ia
-    class P pronta
-    class X correcao
-    class R revisao
-    class H pessoa
-    linkStyle 3 stroke:#cf222e,stroke-width:2px
-    linkStyle 1,5,6,10 stroke:#bf8700,stroke-width:2px
-    linkStyle 11 stroke:#1a7f37,stroke-width:2px
-```
-
-Clique numa etapa abaixo para abrir o detalhe. Na [demo interativa](https://jvfaraco.github.io/os-validator-demo/)
-o mesmo fluxo mostra o que cada etapa fez com cada uma das 38 O.S.
+O fluxo é o da animação lá em cima. Abra cada etapa para ver o detalhe; na
+[demo interativa](https://jvfaraco.github.io/os-validator-demo/) o mesmo fluxo
+mostra o que cada etapa fez com cada uma das 38 O.S.
 
 <details>
 <summary><b>1 · Contrato de entrada</b>: O.S. malformada vai para revisão humana, nunca para correção.</summary>

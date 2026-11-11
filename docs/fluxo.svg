@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="920" height="292" viewBox="0 0 920 292" role="img" aria-labelledby="titulo desc">
-<title id="titulo">Três O.S. fictícias passando pelo validador</title>
-<desc id="desc">Animação do fluxo: O.S. em JSON, contrato, 8 regras, catálogo, guarda de comando, sanitização, IA, validação e PRONTA_PARA_VALIDACAO. A OS-0007 percorre tudo e fica pronta com a combinação C13. A OS-0019 sai nas regras para PRECISA_CORRECAO, sem chamar a IA. A OS-0029 sai na guarda de comando para REVISAO_HUMANA, sem chamar a IA.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="348" viewBox="0 0 920 348" role="img" aria-labelledby="titulo desc">
+<title id="titulo">Fluxo do validador, com três O.S. fictícias passando por ele</title>
+<desc id="desc">Etapas em sequência: O.S. em JSON, contrato de entrada, 8 regras em Python, catálogo fechado, guarda de comando, sanitização, IA que escolhe 1 opção, validação local e PRONTA_PARA_VALIDACAO. Bloqueio nas regras leva a PRECISA_CORRECAO. Fora do contrato, nenhuma opção no catálogo, comando na nota, dado pessoal no pacote ou falha e abstenção na validação levam a REVISAO_HUMANA. Toda saída termina numa pessoa, que aprova. Na animação, a OS-0007 percorre tudo e fica pronta com a combinação C13; a OS-0019 sai nas regras para PRECISA_CORRECAO, sem chamar a IA; a OS-0029 sai na guarda de comando para REVISAO_HUMANA, sem chamar a IA.</desc>
 <style>
   .fundo { fill: #0d1117; }
   .borda { fill: none; stroke: #30363d; }
@@ -12,14 +12,16 @@
   .no-pronta { fill: #12261e; stroke: #7ee787; stroke-width: 1.4; }
   .no-correcao { fill: #2d1416; stroke: #ff7b72; stroke-width: 1.4; }
   .no-revisao { fill: #2b2111; stroke: #e3b341; stroke-width: 1.4; }
+  .no-pessoa { fill: #161b22; stroke: #9198a1; stroke-width: 1.4; }
   .espinha { stroke: #56d4dd; stroke-width: 2; opacity: .55; }
   .saida { stroke-width: 1.4; stroke-dasharray: 4 4; fill: none; }
+  .ate-pessoa { stroke: #6e7681; stroke-width: 1.4; fill: none; }
   .verde { fill: #7ee787; } .vermelho { fill: #ff7b72; } .amarelo { fill: #e3b341; } .azul { fill: #79c0ff; }
 
   /* Quadro parado: o que fica para quem prefere menos movimento */
   .ficha-a { transform: translate(860px, 90px); }
   .ficha-b { transform: translate(260px, 172px); }
-  .ficha-c { transform: translate(460px, 172px); }
+  .ficha-c { transform: translate(460px, 236px); }
   .legenda { opacity: 0; }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -72,34 +74,50 @@
     0%, 66.6% { transform: translate(60px, 90px); opacity: 0; }
     68.1% { opacity: 1; }
     78% { transform: translate(460px, 90px); }
-    83% { transform: translate(460px, 172px); }
-    97% { transform: translate(460px, 172px); opacity: 1; }
-    99.5%, 100% { transform: translate(460px, 172px); opacity: 0; }
+    84% { transform: translate(460px, 236px); }
+    97% { transform: translate(460px, 236px); opacity: 1; }
+    99.5%, 100% { transform: translate(460px, 236px); opacity: 0; }
   }
   @keyframes legenda-a { 0%, 1% { opacity: 0; } 4%, 30% { opacity: 1; } 32.5%, 100% { opacity: 0; } }
   @keyframes legenda-b { 0%, 34% { opacity: 0; } 37%, 63% { opacity: 1; } 65.8%, 100% { opacity: 0; } }
   @keyframes legenda-c { 0%, 67.5% { opacity: 0; } 70.5%, 97% { opacity: 1; } 99.6%, 100% { opacity: 0; } }
   @keyframes brilho-a { 0%, 21% { opacity: 0; } 23% { opacity: 1; } 32%, 100% { opacity: 0; } }
   @keyframes brilho-b { 0%, 46% { opacity: 0; } 48% { opacity: 1; } 65%, 100% { opacity: 0; } }
-  @keyframes brilho-c { 0%, 82% { opacity: 0; } 84% { opacity: 1; } 99%, 100% { opacity: 0; } }
+  @keyframes brilho-c { 0%, 83% { opacity: 0; } 85% { opacity: 1; } 99%, 100% { opacity: 0; } }
 </style>
 <defs>
   <filter id="halo" x="-100%" y="-100%" width="300%" height="300%">
     <feGaussianBlur stdDeviation="3.5" result="b"/>
     <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
   </filter>
+  <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0 10 5 0 10z" fill="#6e7681"/>
+  </marker>
 </defs>
 
-<rect class="fundo" width="920" height="292" rx="12"/>
-<rect class="borda" x=".5" y=".5" width="919" height="291" rx="11.5"/>
+<rect class="fundo" width="920" height="348" rx="12"/>
+<rect class="borda" x=".5" y=".5" width="919" height="347" rx="11.5"/>
 
 <text class="t fraco" x="20" y="34" font-size="13">Três O.S. fictícias passando pelo validador</text>
 <text class="t azul" x="900" y="34" font-size="13" text-anchor="end" font-weight="600">abrir a demo interativa ↗</text>
 
-<!-- espinha e saídas -->
+<!-- espinha, saídas e o caminho até a pessoa -->
 <line class="espinha" x1="60" y1="90" x2="860" y2="90"/>
 <path class="saida" stroke="#ff7b72" d="M260 110V172"/>
-<path class="saida" stroke="#e3b341" d="M360 110V172M460 110V172M560 110V172M760 110V172"/>
+<path class="saida" stroke="#e3b341" d="M160 110V236M360 110V236M460 110V236M560 110V236M760 110V236"/>
+<path class="ate-pessoa" d="M334 190H860"/>
+<path class="ate-pessoa" d="M860 110V235" marker-end="url(#seta)"/>
+<path class="ate-pessoa" d="M804 254H815" marker-end="url(#seta)"/>
+
+<!-- rótulo de cada saída -->
+<g class="t fraco" font-size="11">
+  <text x="166" y="150">fora</text>
+  <text x="266" y="150">bloqueio</text>
+  <text x="366" y="150">nenhuma opção</text>
+  <text x="466" y="150">comando na nota</text>
+  <text x="566" y="150">dado pessoal no pacote</text>
+  <text x="766" y="150">falha ou abstenção</text>
+</g>
 
 <!-- as três O.S., por trás dos nós -->
 <circle class="ficha-a verde" r="7" filter="url(#halo)"/>
@@ -129,24 +147,24 @@
 <rect class="passa passa-6" x="616" y="70" width="88" height="40" rx="8"/>
 <rect class="passa passa-7" x="716" y="70" width="88" height="40" rx="8"/>
 
-<!-- destinos das saídas -->
+<!-- destinos das saídas e a pessoa -->
 <g font-size="12" text-anchor="middle">
   <rect class="no-correcao" x="186" y="172" width="148" height="36" rx="8"/><text class="t vermelho m" x="260" y="194" font-weight="700">PRECISA_CORRECAO</text>
-  <rect class="no-revisao" x="346" y="172" width="428" height="36" rx="8"/><text class="t amarelo m" x="560" y="194" font-weight="700">REVISAO_HUMANA</text>
+  <rect class="no-revisao" x="116" y="236" width="688" height="36" rx="8"/><text class="t amarelo m" x="460" y="258" font-weight="700">REVISAO_HUMANA</text>
+  <rect class="no-pessoa" x="816" y="236" width="88" height="36" rx="18"/><text class="t" x="860" y="258" font-size="13" font-weight="600">Pessoa</text>
 </g>
-<text class="t fraco" x="900" y="196" font-size="12" text-anchor="end">→ uma pessoa aprova</text>
 
 <!-- brilho no destino de cada O.S. -->
 <rect class="brilho brilho-a" x="816" y="70" width="88" height="40" rx="8" fill="none" stroke="#7ee787" stroke-width="3" filter="url(#halo)"/>
 <rect class="brilho brilho-b" x="186" y="172" width="148" height="36" rx="8" fill="none" stroke="#ff7b72" stroke-width="3" filter="url(#halo)"/>
-<rect class="brilho brilho-c" x="346" y="172" width="428" height="36" rx="8" fill="none" stroke="#e3b341" stroke-width="3" filter="url(#halo)"/>
+<rect class="brilho brilho-c" x="116" y="236" width="688" height="36" rx="8" fill="none" stroke="#e3b341" stroke-width="3" filter="url(#halo)"/>
 
 <!-- legendas -->
 <g font-size="13.5">
-  <text class="t legenda legenda-a" x="20" y="252"><tspan class="m verde" font-weight="700">OS-0007</tspan>  nome e telefone do cliente viram [NOME] e [TELEFONE]; a IA escolhe C13 e o código aceita</text>
-  <text class="t legenda legenda-b" x="20" y="252"><tspan class="m vermelho" font-weight="700">OS-0019</tspan>  sensor retirado sem devolução ao estoque: volta ao técnico, e a IA nem é chamada</text>
-  <text class="t legenda legenda-c" x="20" y="252"><tspan class="m amarelo" font-weight="700">OS-0029</tspan>  a nota diz "ignore as regras": revisão humana, sem passar pela IA</text>
-  <text class="t estatica" x="20" y="252"><tspan class="m verde" font-weight="700">OS-0007</tspan> pronta com C13 ·  <tspan class="m vermelho" font-weight="700">OS-0019</tspan> volta ao técnico ·  <tspan class="m amarelo" font-weight="700">OS-0029</tspan> vai para revisão</text>
-  <text class="t fraco" x="20" y="274" font-size="12">Regras primeiro, IA só para ler a nota, decisão sempre do código. Dados 100% fictícios.</text>
+  <text class="t legenda legenda-a" x="20" y="308"><tspan class="m verde" font-weight="700">OS-0007</tspan>  nome e telefone do cliente viram [NOME] e [TELEFONE]; a IA escolhe C13 e o código aceita</text>
+  <text class="t legenda legenda-b" x="20" y="308"><tspan class="m vermelho" font-weight="700">OS-0019</tspan>  sensor retirado sem devolução ao estoque: volta ao técnico, e a IA nem é chamada</text>
+  <text class="t legenda legenda-c" x="20" y="308"><tspan class="m amarelo" font-weight="700">OS-0029</tspan>  a nota diz "ignore as regras": revisão humana, sem passar pela IA</text>
+  <text class="t estatica" x="20" y="308"><tspan class="m verde" font-weight="700">OS-0007</tspan> pronta com C13 ·  <tspan class="m vermelho" font-weight="700">OS-0019</tspan> volta ao técnico ·  <tspan class="m amarelo" font-weight="700">OS-0029</tspan> vai para revisão</text>
+  <text class="t fraco" x="20" y="330" font-size="12">Regras primeiro, IA só para ler a nota, caminho decidido pelo código e aprovação final de uma pessoa. Dados 100% fictícios.</text>
 </g>
 </svg>
