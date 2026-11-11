@@ -12,60 +12,68 @@
   try { const t = localStorage.getItem("tema"); if (t === "claro" || t === "escuro") document.documentElement.dataset.theme = t === "claro" ? "light" : "dark"; } catch (e) {}
 </script>
 <style>
+@font-face { font-family: "DM Sans"; src: url("fonts/dmsans.woff") format("woff"); font-weight: 100 1000; font-display: swap; }
+@font-face { font-family: "Fira Code"; src: url("fonts/firacode.woff") format("woff"); font-weight: 300 700; font-display: swap; }
+@font-face { font-family: "DM Sans Fallback"; src: local("Arial"), local("Liberation Sans"), local("Roboto"); size-adjust: 103%; }
+@font-face { font-family: "Fira Code Fallback"; src: local("Consolas"), local("Menlo"); size-adjust: 109%; }
+
+/* Mesma identidade do portfólio: azul-marinho, amarelo de destaque, DM Sans e Fira Code. */
 :root {
   color-scheme: light;
-  --bg: #ffffff;
-  --surface: #f6f8fa;
-  --surface-2: #eaeef2;
-  --border: #d0d7de;
-  --border-strong: #8c959f;
-  --text: #1f2328;
-  --muted: #59636e;
-  --accent: #1b7c83;
+  --bg: #f0f4ff;
+  --surface: #ffffff;
+  --surface-2: #e6ecf9;
+  --border: #d3dbeb;
+  --border-strong: #8592ab;
+  --text: #0f172a;
+  --muted: #475569;
+  --accent: #1e3a8a;
+  --marca: #ffc72c;
+  --marca-tx: #735000;
   --pronta: #1a7f37;
   --correcao: #cf222e;
   --revisao: #9a6700;
-  --ia: #0969da;
-  --pessoal: #8250df;
-  --pronta-bg: #dafbe1;
-  --correcao-bg: #ffebe9;
-  --revisao-bg: #fff8c5;
-  --ia-bg: #ddf4ff;
-  --pessoal-bg: #fbefff;
+  --ia: #1d4ed8;
+  --pessoal: #7c3aed;
+  --pronta-bg: #dcf5e3;
+  --correcao-bg: #fde8e7;
+  --revisao-bg: #fff3c4;
+  --ia-bg: #e0e9ff;
+  --pessoal-bg: #f1e8ff;
   --pronta-tx: #116329;
   --correcao-tx: #a40e26;
-  --revisao-tx: #7d4e00;
-  --focus: #0969da;
-  --sombra: 0 1px 2px rgb(31 35 40 / .06), 0 8px 24px rgb(31 35 40 / .06);
+  --revisao-tx: #6b4500;
+  --focus: #1d4ed8;
+  --sombra: 0 1px 2px rgb(15 23 42 / .06), 0 10px 28px rgb(30 58 138 / .08);
 
-  --r: 10px;
-  --r-sm: 6px;
+  --r: 12px;
+  --r-sm: 8px;
   --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
   --dur-1: 120ms; --dur-2: 220ms; --dur-3: 520ms;
   --ease-out: cubic-bezier(.2, .8, .2, 1);
   --ease-in-out: cubic-bezier(.65, 0, .35, 1);
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Ubuntu, sans-serif;
-  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  --font: "DM Sans", "DM Sans Fallback", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "Fira Code", "Fira Code Fallback", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg: #0d1117; --surface: #161b22; --surface-2: #21262d; --border: #30363d; --border-strong: #6e7681;
-    --text: #e6edf3; --muted: #9198a1; --accent: #56d4dd;
-    --pronta: #7ee787; --correcao: #ff7b72; --revisao: #e3b341; --ia: #79c0ff; --pessoal: #d2a8ff;
-    --pronta-bg: #12261e; --correcao-bg: #2d1416; --revisao-bg: #2b2111; --ia-bg: #0f2240; --pessoal-bg: #2a1d3f;
-    --pronta-tx: #7ee787; --correcao-tx: #ff7b72; --revisao-tx: #e3b341;
-    --focus: #79c0ff; --sombra: 0 1px 2px rgb(0 0 0 / .3), 0 8px 24px rgb(0 0 0 / .25);
+    --bg: #0a0f1e; --surface: #111a2d; --surface-2: #1a2235; --border: #29364d; --border-strong: #56637e;
+    --text: #e2e8f0; --muted: #94a3b8; --accent: #8ab4ff; --marca: #ffc72c; --marca-tx: #ffc72c;
+    --pronta: #83c6a2; --correcao: #ed746c; --revisao: #ffc72c; --ia: #79c0ff; --pessoal: #d2a8ff;
+    --pronta-bg: #10261f; --correcao-bg: #2c1519; --revisao-bg: #2a2110; --ia-bg: #0f2242; --pessoal-bg: #261d3d;
+    --pronta-tx: #83c6a2; --correcao-tx: #f08a83; --revisao-tx: #ffc72c;
+    --focus: #8ab4ff; --sombra: 0 1px 2px rgb(0 0 0 / .35), 0 12px 32px rgb(0 0 0 / .3);
   }
 }
 :root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #0d1117; --surface: #161b22; --surface-2: #21262d; --border: #30363d; --border-strong: #6e7681;
-  --text: #e6edf3; --muted: #9198a1; --accent: #56d4dd;
-  --pronta: #7ee787; --correcao: #ff7b72; --revisao: #e3b341; --ia: #79c0ff; --pessoal: #d2a8ff;
-  --pronta-bg: #12261e; --correcao-bg: #2d1416; --revisao-bg: #2b2111; --ia-bg: #0f2240; --pessoal-bg: #2a1d3f;
-    --pronta-tx: #7ee787; --correcao-tx: #ff7b72; --revisao-tx: #e3b341;
-  --focus: #79c0ff; --sombra: 0 1px 2px rgb(0 0 0 / .3), 0 8px 24px rgb(0 0 0 / .25);
+    color-scheme: dark;
+    --bg: #0a0f1e; --surface: #111a2d; --surface-2: #1a2235; --border: #29364d; --border-strong: #56637e;
+    --text: #e2e8f0; --muted: #94a3b8; --accent: #8ab4ff; --marca: #ffc72c; --marca-tx: #ffc72c;
+    --pronta: #83c6a2; --correcao: #ed746c; --revisao: #ffc72c; --ia: #79c0ff; --pessoal: #d2a8ff;
+    --pronta-bg: #10261f; --correcao-bg: #2c1519; --revisao-bg: #2a2110; --ia-bg: #0f2242; --pessoal-bg: #261d3d;
+    --pronta-tx: #83c6a2; --correcao-tx: #f08a83; --revisao-tx: #ffc72c;
+    --focus: #8ab4ff; --sombra: 0 1px 2px rgb(0 0 0 / .35), 0 12px 32px rgb(0 0 0 / .3);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -90,7 +98,7 @@ code, pre, .mono { font-family: var(--mono); font-size: .875em; }
 .topo__barra { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; }
 .marca { font: 600 14px/1 var(--mono); color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: var(--s2); }
 .marca:hover { color: var(--text); }
-.marca__ponto { width: 10px; height: 10px; border-radius: 50%; background: var(--pronta); box-shadow: 0 0 0 3px var(--pronta-bg); }
+.marca__ponto { width: 10px; height: 10px; border-radius: 50%; background: var(--marca); box-shadow: 0 0 0 3px rgb(255 199 44 / .18); }
 .topo__links { display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
 .botao {
   display: inline-flex; align-items: center; gap: var(--s2);
@@ -111,7 +119,9 @@ code, pre, .mono { font-family: var(--mono); font-size: .875em; }
   :root:not([data-theme="light"]) .icone-sol { display: block; }
   :root:not([data-theme="light"]) .icone-lua { display: none; }
 }
-h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; letter-spacing: -.02em; margin: var(--s5) 0 var(--s3); text-wrap: balance; }
+.rotulo { display: inline-block; margin-top: var(--s6); padding: 4px 12px; border: 1px solid var(--marca-tx); border-radius: 6px; color: var(--marca-tx); font: 500 13px/1.4 var(--mono); }
+h1 { font: 700 clamp(30px, 4.4vw, 46px)/1.12 var(--mono); letter-spacing: -.03em; margin: var(--s3) 0 var(--s3); text-wrap: balance; }
+h1 em { font-style: normal; color: var(--marca-tx); }
 .lead { margin: 0; max-width: 72ch; color: var(--muted); font-size: 17px; text-wrap: pretty; }
 .lead strong { color: var(--text); font-weight: 600; }
 
@@ -125,7 +135,8 @@ h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; letter-spacing: -.02e
 
 /* ---------- lateral: provedor, métricas, destaques, todas ---------- */
 .lateral { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s4); align-content: start; min-width: 0; }
-.bloco h2 { font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 0 0 var(--s2); }
+.bloco h2 { font: 500 13px/1.4 var(--mono); color: var(--marca-tx); margin: 0 0 var(--s2); }
+.bloco h2::before { content: "// "; opacity: .8; }
 .segmentos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 3px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface); margin: 0; }
 .segmentos legend { padding: 0; }
 .segmentos label { position: relative; }
@@ -193,7 +204,7 @@ h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; letter-spacing: -.02e
 /* ---------- palco: caso, fluxo e detalhe ---------- */
 .palco { min-width: 0; }
 .caso { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; margin-bottom: var(--s4); }
-.caso h2 { margin: 0; font-size: 22px; line-height: 1.25; letter-spacing: -.01em; display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
+.caso h2 { margin: 0; font-size: 22px; font-family: var(--mono); letter-spacing: -.01em; line-height: 1.25; letter-spacing: -.01em; display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
 .caso h2 .mono { font-size: 20px; }
 .caso__gabarito { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
 .caso__gabarito .nao-bateu { color: var(--correcao-tx); font-weight: 600; }
@@ -279,7 +290,7 @@ h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; letter-spacing: -.02e
 .detalhe { padding: var(--s4) var(--s5) var(--s5); box-shadow: var(--sombra); scroll-margin-top: var(--s4); }
 .etapa > .detalhe { margin-top: var(--s2); padding: var(--s4); }
 .detalhe__topo { display: flex; justify-content: space-between; align-items: center; gap: var(--s2); flex-wrap: wrap; font: 12px var(--mono); color: var(--muted); }
-.detalhe h3 { margin: 6px 0 4px; font-size: 20px; line-height: 1.3; letter-spacing: -.01em; }
+.detalhe h3 { margin: 6px 0 4px; font-size: 20px; font-family: var(--mono); font-weight: 600; line-height: 1.3; letter-spacing: -.01em; }
 .detalhe .detalhe__faz { margin: 0 0 var(--s4); color: var(--muted); font-size: 14px; text-wrap: pretty; }
 .detalhe__conteudo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s4); }
 .detalhe__conteudo > *, .lado-a-lado > * { min-width: 0; }
@@ -394,7 +405,7 @@ ul.lista { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; font-size: 1
 <div class="pagina">
   <header class="topo">
     <div class="topo__barra">
-      <a class="marca" href="https://github.com/JvFaraco/os-validator-demo"><span class="marca__ponto" aria-hidden="true"></span>JvFaraco/os-validator-demo</a>
+      <a class="marca" href="https://jvfaraco.github.io/jvfaraco-portifolio/"><span class="marca__ponto" aria-hidden="true"></span>JvFaraco</a>
       <nav class="topo__links" aria-label="Links">
         <a class="botao" href="https://github.com/JvFaraco/os-validator-demo#readme">README</a>
         <a class="botao" href="https://github.com/JvFaraco/os-validator-demo">
@@ -408,7 +419,8 @@ ul.lista { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; font-size: 1
         </button>
       </nav>
     </div>
-    <h1>Siga uma O.S. pelo validador</h1>
+    <span class="rotulo">// demo interativa · dados fictícios</span>
+    <h1>Siga uma O.S. pelo <em>validador</em></h1>
     <p class="lead">Escolha uma das 38 O.S. fictícias e veja por onde ela passa. <strong>As regras em Python vêm primeiro, a IA só lê a nota do técnico e quem decide o caminho é o código.</strong> As respostas da IA são as da rodada real de 9/11/2026, reexibidas aqui sem chamar a API.</p>
   </header>
 
@@ -424,18 +436,18 @@ ul.lista { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; font-size: 1
       </section>
 
       <section class="bloco" aria-labelledby="t-metricas">
-        <h2 id="t-metricas">Rodada completa</h2>
+        <h2 id="t-metricas">rodada completa</h2>
         <dl class="metricas" id="metricas"></dl>
         <p class="erros-provedor" id="erros-provedor"></p>
       </section>
 
       <section class="bloco bloco--destaques" aria-labelledby="t-destaques">
-        <h2 id="t-destaques">Comece por um destes</h2>
+        <h2 id="t-destaques">comece por um destes</h2>
         <ul class="destaques" id="destaques"></ul>
       </section>
 
       <details class="bloco bloco--todas" id="bloco-todas" open>
-        <summary><h2 id="t-todas">Todas as 38, pelo gabarito</h2></summary>
+        <summary><h2 id="t-todas">todas as 38, pelo gabarito</h2></summary>
         <fieldset class="todas" id="todas">
           <legend class="sr-only">O.S. fictícias</legend>
         </fieldset>

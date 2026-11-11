@@ -2,21 +2,21 @@
 <title id="titulo">Fluxo do validador, com três O.S. fictícias passando por ele</title>
 <desc id="desc">Etapas em sequência: O.S. em JSON, contrato de entrada, 8 regras em Python, catálogo fechado, guarda de comando, sanitização, IA que escolhe 1 opção, validação local e PRONTA_PARA_VALIDACAO. Bloqueio nas regras leva a PRECISA_CORRECAO. Fora do contrato, nenhuma opção no catálogo, comando na nota, dado pessoal no pacote ou falha e abstenção na validação levam a REVISAO_HUMANA. Toda saída termina numa pessoa, que aprova. Na animação, a OS-0007 percorre tudo e fica pronta com a combinação C13; a OS-0019 sai nas regras para PRECISA_CORRECAO, sem chamar a IA; a OS-0029 sai na guarda de comando para REVISAO_HUMANA, sem chamar a IA.</desc>
 <style>
-  .fundo { fill: #0d1117; }
-  .borda { fill: none; stroke: #30363d; }
-  .t { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Ubuntu, sans-serif; fill: #e6edf3; }
-  .m { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace; }
-  .fraco { fill: #9198a1; }
-  .no { fill: #161b22; stroke: #3d444d; stroke-width: 1.2; }
+  .fundo { fill: #0a0f1e; }
+  .borda { fill: none; stroke: #29364d; }
+  .t { font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Ubuntu, sans-serif; fill: #e2e8f0; }
+  .m { font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace; }
+  .fraco { fill: #a1aec5; }
+  .no { fill: #111a2d; stroke: #29364d; stroke-width: 1.2; }
   .no-ia { fill: #0f2240; stroke: #79c0ff; stroke-width: 1.4; }
-  .no-pronta { fill: #12261e; stroke: #7ee787; stroke-width: 1.4; }
-  .no-correcao { fill: #2d1416; stroke: #ff7b72; stroke-width: 1.4; }
-  .no-revisao { fill: #2b2111; stroke: #e3b341; stroke-width: 1.4; }
-  .no-pessoa { fill: #161b22; stroke: #9198a1; stroke-width: 1.4; }
-  .espinha { stroke: #56d4dd; stroke-width: 2; opacity: .55; }
+  .no-pronta { fill: #10261f; stroke: #83c6a2; stroke-width: 1.4; }
+  .no-correcao { fill: #2c1519; stroke: #ed746c; stroke-width: 1.4; }
+  .no-revisao { fill: #2a2110; stroke: #ffc72c; stroke-width: 1.4; }
+  .no-pessoa { fill: #111a2d; stroke: #a1aec5; stroke-width: 1.4; }
+  .espinha { stroke: #8ab4ff; stroke-width: 2; opacity: .55; }
   .saida { stroke-width: 1.4; stroke-dasharray: 4 4; fill: none; }
-  .ate-pessoa { stroke: #6e7681; stroke-width: 1.4; fill: none; }
-  .verde { fill: #7ee787; } .vermelho { fill: #ff7b72; } .amarelo { fill: #e3b341; } .azul { fill: #79c0ff; }
+  .ate-pessoa { stroke: #56637e; stroke-width: 1.4; fill: none; }
+  .verde { fill: #83c6a2; } .vermelho { fill: #ed746c; } .amarelo { fill: #ffc72c; } .azul { fill: #79c0ff; }
 
   /* Quadro parado: o que fica para quem prefere menos movimento */
   .ficha-a { transform: translate(860px, 90px); }
@@ -45,7 +45,7 @@
     .passa-7 { animation: passa-7 12s linear infinite; }
   }
   .brilho { opacity: 1; }
-  .passa { opacity: 0; fill: rgb(86 212 221 / .22); stroke: #56d4dd; stroke-width: 2.5; }
+  .passa { opacity: 0; fill: rgb(138 180 255 / .2); stroke: #8ab4ff; stroke-width: 2.5; }
   @keyframes passa-0 { 0% { opacity: 1; } 2.4% { opacity: 0; } 32.7% { opacity: 0; } 33.3% { opacity: 1; } 35.7% { opacity: 0; } 66% { opacity: 0; } 66.6% { opacity: 1; } 69% { opacity: 0; } 100% { opacity: 0; } }
   @keyframes passa-1 { 0% { opacity: 0; } 2.15% { opacity: 0; } 2.75% { opacity: 1; } 5.15% { opacity: 0; } 37.05% { opacity: 0; } 37.65% { opacity: 1; } 40.05% { opacity: 0; } 68.85% { opacity: 0; } 69.45% { opacity: 1; } 71.85% { opacity: 0; } 100% { opacity: 0; } }
   @keyframes passa-2 { 0% { opacity: 0; } 4.9% { opacity: 0; } 5.5% { opacity: 1; } 7.9% { opacity: 0; } 41.4% { opacity: 0; } 42% { opacity: 1; } 44.4% { opacity: 0; } 71.7% { opacity: 0; } 72.3% { opacity: 1; } 74.7% { opacity: 0; } 100% { opacity: 0; } }
@@ -91,7 +91,7 @@
     <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
   </filter>
   <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-    <path d="M0 0 10 5 0 10z" fill="#6e7681"/>
+    <path d="M0 0 10 5 0 10z" fill="#56637e"/>
   </marker>
 </defs>
 
@@ -103,8 +103,8 @@
 
 <!-- espinha, saídas e o caminho até a pessoa -->
 <line class="espinha" x1="60" y1="90" x2="860" y2="90"/>
-<path class="saida" stroke="#ff7b72" d="M260 110V172"/>
-<path class="saida" stroke="#e3b341" d="M160 110V236M360 110V236M460 110V236M560 110V236M760 110V236"/>
+<path class="saida" stroke="#ed746c" d="M260 110V172"/>
+<path class="saida" stroke="#ffc72c" d="M160 110V236M360 110V236M460 110V236M560 110V236M760 110V236"/>
 <path class="ate-pessoa" d="M334 190H860"/>
 <path class="ate-pessoa" d="M860 110V235" marker-end="url(#seta)"/>
 <path class="ate-pessoa" d="M804 254H815" marker-end="url(#seta)"/>
@@ -155,9 +155,9 @@
 </g>
 
 <!-- brilho no destino de cada O.S. -->
-<rect class="brilho brilho-a" x="816" y="70" width="88" height="40" rx="8" fill="none" stroke="#7ee787" stroke-width="3" filter="url(#halo)"/>
-<rect class="brilho brilho-b" x="186" y="172" width="148" height="36" rx="8" fill="none" stroke="#ff7b72" stroke-width="3" filter="url(#halo)"/>
-<rect class="brilho brilho-c" x="116" y="236" width="688" height="36" rx="8" fill="none" stroke="#e3b341" stroke-width="3" filter="url(#halo)"/>
+<rect class="brilho brilho-a" x="816" y="70" width="88" height="40" rx="8" fill="none" stroke="#83c6a2" stroke-width="3" filter="url(#halo)"/>
+<rect class="brilho brilho-b" x="186" y="172" width="148" height="36" rx="8" fill="none" stroke="#ed746c" stroke-width="3" filter="url(#halo)"/>
+<rect class="brilho brilho-c" x="116" y="236" width="688" height="36" rx="8" fill="none" stroke="#ffc72c" stroke-width="3" filter="url(#halo)"/>
 
 <!-- legendas -->
 <g font-size="13.5">

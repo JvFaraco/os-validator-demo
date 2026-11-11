@@ -15,7 +15,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-PULAR_SUFIXOS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".zip", ".pdf", ".woff", ".woff2"}
+PULAR_SUFIXOS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".zip", ".pdf", ".woff", ".woff2", ".ttf", ".otf"}
 PULAR_PARTES = {".git", ".venv", "venv", "__pycache__", ".pytest_cache"}
 DOMINIOS_PERMITIDOS = ("example.com", "example.org", "users.noreply.github.com")
 
